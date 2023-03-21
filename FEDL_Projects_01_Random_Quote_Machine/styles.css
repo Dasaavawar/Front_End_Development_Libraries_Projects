@@ -1,0 +1,63 @@
+:root {
+    margin: 0px;
+    padding: 0px;
+    --color: initial;
+  }
+  
+  body {
+    font-family: sans-serif;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color);
+  }
+  
+  h2 {
+    font-size: 20px;
+    margin: 15px 0;
+    color: var(--color);
+  }
+  
+  p {
+    margin: 0;
+    font-size: 20px;
+    color: var(--color);
+  }
+  
+  #app {
+    margin: 5vw;
+    padding: 20px;
+  }
+  
+  #quote-box {
+    width: 60vw;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: white;
+    border-color: var(--color);
+    display: inline-blick;
+    border: 2px rgba(0, 0, 0, .6) solid;
+  }
+  
+  .actions {
+      display: flex;
+      align-items: center;
+  }
+  
+  .button {
+    margin-left: 15px;
+    padding: 7px 10px;
+    text-decoration: none;
+    background-color: var(--color);
+    border-color: var(--color);
+    display: inline-blick;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
