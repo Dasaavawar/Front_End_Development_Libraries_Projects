@@ -1,7 +1,7 @@
 # freeCodeCamp - Front End Development Libraries - Projects - I - Build a Random Quote Machine - Instructions
 
 
-# 1. Projects - Build a Random Quote Machine
+## 1. Projects - Build a Random Quote Machine
 
 Objective: Build an app that is functionally similar to this: https://random-quote-machine.freecodecamp.rocks/.
 
