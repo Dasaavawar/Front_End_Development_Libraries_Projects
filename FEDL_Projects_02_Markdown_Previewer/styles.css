@@ -1,0 +1,259 @@
+  :root {
+    margin: 0px;
+    padding: 0px;
+    --background-first-color: white;
+    --background-second-color: skyblue;
+    --console-first-color: limegreen;
+    --console-second-color: black;
+    --console-third-color: darkgreen;
+    --render-first-color: crimson;
+    --render-second-color: khaki;
+    --render-third-color: darkred;
+    --scrollbar-first-color: lightgray;
+  }
+
+  *:focus {
+    outline: none;
+  }
+
+  body {
+    font-family: sans-serif;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-second-color);
+    overflow: hidden;
+    margin: 0;
+  }
+  
+  #app {
+    height: 100vh;
+  }
+
+  .app-title {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    color: var(--background-first-color);
+    font-family: sans-serif;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .app-title h1 {
+    margin: 0;
+  }
+
+  .app-title h1::selection {
+    color: var(--background-second-color);
+    background-color: var(--background-first-color);
+  }
+
+  .app-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 90vh;
+    background-color: var(--console-second-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .console-container {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 50vw;
+    overflow: hidden;
+  }
+
+  .console-title-bar {
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--console-first-color);
+    color: var(--console-second-color);
+    padding: 5px;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    font-family: monospace;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .console-content {
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1.5px var(--console-first-color) solid;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: var(--console-second-color);
+    display: inline-block;
+    color: var(--console-first-color);
+    overflow-y: auto;
+    overflow-x: auto;
+    word-wrap: break-word;
+    display: inline-block;
+    font-family: monospace;
+  }
+  
+  textarea {
+    resize: none;
+  }
+
+  .console-title-bar h2::selection {
+    color: var(--console-first-color);
+    background-color: var(--console-second-color);
+  }
+
+  .console-content::selection {
+    color: var(--console-second-color);
+    background-color: var(--console-first-color);
+  }
+  
+  #editor::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  #editor::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-first-color) !important;
+  }
+  
+  #editor::-webkit-scrollbar-thumb {
+    background-color: var(--console-third-color) !important;
+  }
+
+  #editor::-webkit-scrollbar-corner {
+    background-color: var(--console-first-color) !important;
+  }
+  
+  .render-container {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 50vw;
+    overflow: hidden;
+  }
+  
+  .render-title-bar {
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--render-first-color);
+    color: var(--render-second-color);
+    padding: 5px;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    font-family: cursive;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .render-content {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1.5px var(--render-first-color) solid;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: var(--render-second-color);
+    color: var(--render-first-color);
+    overflow-y: auto;
+    overflow-x: auto;
+    word-wrap: break-word;
+    display: inline-block;
+    font-family: cursive;
+  }
+
+  .render-title-bar h2::selection {
+    color: var(--render-first-color);
+    background-color: var(--render-second-color);
+  }
+  
+  .render-content ::selection,
+  #preview ::selection {
+    background-color: var(--render-first-color);
+    color: var(--render-second-color);
+  }
+
+  #preview::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  #preview::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-first-color) !important;
+  }
+  
+  #preview::-webkit-scrollbar-thumb {
+    background-color: var(--render-third-color) !important;
+  }
+
+  #preview::-webkit-scrollbar-corner {
+    background-color: var(--render-first-color) !important;
+  }
+
+  #preview pre {
+    background-color: var(--background-first-color);
+    display: block;
+  }
+
+  #preview a {
+    font-weight: bold;
+    color: var(--render-third-color)
+  }
+
+  #preview code {
+    background-color: var(--console-second-color);
+    color: var(--console-first-color);
+    border-radius: 2.5px;
+    display: block !important;
+  }
+
+  @media screen and (max-width: 382px) {
+    .app-title h1 {
+      white-space: nowrap;
+    }
+
+    .console-container {
+      display: flex;
+      flex-direction: column;
+      height: 45vh;
+      position: fixed;
+      left: 0;
+      top: 10vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    .render-container {
+      display: flex;
+      flex-direction: column;
+      height: 45vh;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      overflow: hidden;
+    }
+  }  
