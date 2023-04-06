@@ -1,7 +1,7 @@
 # freeCodeCamp - Front End Development Libraries - Projects - II - Build a Markdown Previewer - Instructions
 
 
-# 2. Projects - Build a Markdown Previewer
+## 2. Projects - Build a Markdown Previewer
 
 Objective: Build an app that is functionally similar to this: https://markdown-previewer.freecodecamp.rocks/.
 
@@ -26,4 +26,3 @@ Optional Bonus (you do not need to make this test pass): My markdown previewer i
 You can build your project by using this CodePen template and clicking Save to create your own pen. Or you can use this CDN link to run the tests in any environment you like: https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js
 
 Once you're done, submit the URL to your working project with all its tests passing.
-
