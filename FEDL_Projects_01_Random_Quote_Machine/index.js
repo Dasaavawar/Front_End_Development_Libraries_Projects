@@ -54,7 +54,6 @@ const QuoteBox = () => {
 
   const [quotes, setQuotes] = React.useState([])
   const [colorIndex, setColorIndex] = React.useState(randomColorIndex())
-  const [quoteIndex, setQuoteIndex] = React.useState("")
   const [randomQuote, setRandomQuote] = React.useState("")
 
   const randomQuoteIndex = (quoteIndex) => {
@@ -66,17 +65,18 @@ const QuoteBox = () => {
 }
 
   useEffect(() => {
+    
     setColorIndex(randomColorIndex())
     document.documentElement.style.setProperty('--color', `${colors[colorIndex]}`)
-    
+
     axios.get(baseURL).then(response => {
         setQuotes(response.data)
         let initIndex = Math.floor(Math.random() * (response.data.length - 1))
         setRandomQuote(response.data[initIndex])
     })
 
-  }, []);
-  
+  }, [setQuotes, setRandomQuote]);
+    
   function handleNewQuote() {
     setColorIndex(randomColorIndex())
     document.documentElement.style.setProperty('--color', `${colors[colorIndex]}`)
@@ -86,7 +86,7 @@ const QuoteBox = () => {
   return (
     <div id="quote-box">
       <p id="text">“{randomQuote.text}”</p>
-      <h2 id="author">- {randomQuote.author?.trim() ? <>{randomQuote.author}</> : <>Anonymous</>}</h2>
+      <h2 id="author">- {randomQuote.author?.trim() ? <>{randomQuote.author}</> : <>Unknown</>}</h2>
       <div class="actions">
       <button id="new-quote" class="button" onClick={handleNewQuote}>New Quote~</button>
       <button class="button">

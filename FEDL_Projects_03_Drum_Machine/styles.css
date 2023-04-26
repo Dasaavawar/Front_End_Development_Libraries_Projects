@@ -1,0 +1,11 @@
+body {
+    background-color: blue;
+    color: white;
+    /* Add any other styles you want to apply when the button is focused */
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
