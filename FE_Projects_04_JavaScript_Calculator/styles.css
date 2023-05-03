@@ -1,0 +1,32 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    gap: 10px;
+}
+
+.calculator {
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    padding: 10%;
+}
+
+
+#zero {
+    grid-column-end: span 2;
+}
+
+#equals {
+    grid-column-end: span 2;
+}
+
+.screen {
+    background-color: black;
+    color: yellowgreen;
+    width: 505px;
+    padding: 2px;
+    font-size: 20px;
+    font-family: 'Dot Matrix', monospace;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
