@@ -1,15 +1,80 @@
 body {
-    background-color: blue;
+    background-color: grey;
     color: white;
-    /* Add any other styles you want to apply when the button is focused */
+  }
+
+  button {
+    color: teal;
+    border-color: teal;
+    background: linear-gradient(135deg, mediumturquoise, darkcyan);
+    border-width: 5px;
+    font-size: 18px;
+    text-transform: uppercase;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  button:active {
+    color: darkorchid;
+    border-color: darkorchid;
+    background: linear-gradient(135deg, lightcoral, orchid);
+    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
+    transform: translateY(3px);
+  }
+
+  .pressed-button {
+    background-color: lightcoral;
+    color: crimson;
+    border-color: crimson;
+    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
+    transform: translateY(3px);
+  }
+
+  .Pad {
+    margin: 0px;
+    width: 0px;
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: repeat(3, 90px);
+    grid-gap: 5px;
   }
 
-  .red-button {
-    background-color: red;
+  .grid button {
+    font-size: 1.5rem;
+    height: 90px;
+  }
+
+  .title {
+    border: 5px solid darkslateblue;
+    padding: 1em;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }  
+
+  @-moz-document url-prefix() {
+    input[type="range"] {
+      -moz-appearance: none;
+      height: 30px;
+      background-color: grey;
+      border: 5px solid steelblue;
+    }
+    
+    input[type="range"]::-moz-range-thumb {
+      -moz-appearance: none;
+      width: 20px;
+      height: 20px;
+      background-color: steelblue;
+      border-radius: 50%;
+    }
+    
+    input[type="range"]::-moz-range-track {
+      -moz-appearance: none;
+      height: 15px;
+      background-color: lightseagreen;
+    }
   }
