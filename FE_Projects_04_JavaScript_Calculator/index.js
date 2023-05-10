@@ -4,19 +4,39 @@ const App = () => {
   const [expression, setExpression] = useState('0')
 
   const regex = /[+\-*/]{2}$/
-  const max_length = 36
+  const max_length = 40
+
+  const appendNumber = (number) => {
+    if (expression.toString().length >= max_length) {
+      setExpression((prevText) => prevText)
+    } else if (expression == "0") {
+      setExpression(number)
+    } else if (expression.toString().slice(-2) === "*0" || expression.toString().slice(-2) === "/0" || expression.toString().slice(-2) === "-0" || expression.toString().slice(-2) === "+0") {
+      setExpression((prevText) => prevText.slice(0, -1) + number)
+    } else {
+      setExpression((prevText) => prevText + number) 
+    }
+  }
 
   const handleClick = (id) => {
     switch (id) {
       case "clear":
-        setExpression(0)
+        setExpression("0")
+        const ClearButtonRef = document.getElementById("clear")
+        ClearButtonRef.classList.add("pressed-button")
+        setTimeout(() => ClearButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "delete":
-        if (expression == 0) {
-          setExpression(0)
+        if (expression == "0") {
+          setExpression("0")
+        } else if (expression.length == 1) {
+          setExpression("0")
         } else {
           setExpression((prevText) => prevText.slice(0, -1))
         }
+        const DeleteButtonRef = document.getElementById("delete")
+        DeleteButtonRef.classList.add("pressed-button")
+        setTimeout(() => DeleteButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "decimal":
         if (expression.toString().length >= max_length) {
@@ -28,9 +48,20 @@ const App = () => {
         } else {
           setExpression((prevText) => prevText + ".")
         }
+        const DecimalButtonRef = document.getElementById("decimal")
+        DecimalButtonRef.classList.add("pressed-button")
+        setTimeout(() => DecimalButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "equals":
-        setExpression(eval(expression).toFixed(4).replace(/\.?0+$/, ''))
+        try {
+          eval(expression).toFixed(4).replace(/\.?0+$/, '')
+          setExpression(eval(expression).toFixed(4).replace(/\.?0+$/, ''))
+        } catch (error) {
+          setExpression((prevText) => prevText)
+        }
+        const EqualsButtonRef = document.getElementById("equals")
+        EqualsButtonRef.classList.add("pressed-button")
+        setTimeout(() => EqualsButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "add":
         if (expression.toString().slice(-1) === "+" || expression.toString().length >= max_length) {
@@ -44,6 +75,9 @@ const App = () => {
         } else {
           setExpression((prevText) => prevText + "+")
         }
+        const AddButtonRef = document.getElementById("add")
+        AddButtonRef.classList.add("pressed-button")
+        setTimeout(() => AddButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "subtract":
         if (expression.toString().slice(-1) === "-" || expression.toString().length >= max_length) {
@@ -57,6 +91,9 @@ const App = () => {
         } else {
           setExpression((prevText) => prevText + "-")
         }
+        const SubtractButtonRef = document.getElementById("subtract")
+        SubtractButtonRef.classList.add("pressed-button")
+        setTimeout(() => SubtractButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "multiply":
         if (expression.toString().slice(-2) === "**" || expression.toString().length >= max_length) {
@@ -70,6 +107,9 @@ const App = () => {
         } else {
           setExpression((prevText) => prevText + "*")
         }
+        const MultiplyButtonRef = document.getElementById("multiply")
+        MultiplyButtonRef.classList.add("pressed-button")
+        setTimeout(() => MultiplyButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "divide":
         if (expression.toString().slice(-1) === "/" || expression.toString().length >= max_length) {
@@ -81,114 +121,171 @@ const App = () => {
         } else {
           setExpression((prevText) => prevText + "/")
         }
+        const DivideButtonRef = document.getElementById("divide")
+        DivideButtonRef.classList.add("pressed-button")
+        setTimeout(() => DivideButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "zero":
-        if (expression == 0 || expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else {
-          setExpression((prevText) => prevText + "0") 
-        }
+        appendNumber("0")
+        const zeroButtonRef = document.getElementById("zero")
+        zeroButtonRef.classList.add("pressed-button")
+        setTimeout(() => zeroButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "one":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(1)
-        } else {
-          setExpression((prevText) => prevText + "1") 
-        }
+        appendNumber("1")
+        const OneButtonRef = document.getElementById("one")
+        OneButtonRef.classList.add("pressed-button")
+        setTimeout(() => OneButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "two":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(2)
-        } else {
-          setExpression((prevText) => prevText + "2") 
-        }
+        appendNumber("2")
+        const TwoButtonRef = document.getElementById("two")
+        TwoButtonRef.classList.add("pressed-button")
+        setTimeout(() => TwoButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "three":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(3)
-        } else {
-          setExpression((prevText) => prevText + "3") 
-        }
+        appendNumber("3")
+        const ThreeButtonRef = document.getElementById("three")
+        ThreeButtonRef.classList.add("pressed-button")
+        setTimeout(() => ThreeButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "four":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(4)
-        } else {
-          setExpression((prevText) => prevText + "4") 
-        }
+        appendNumber("4")
+        const FourButtonRef = document.getElementById("four")
+        FourButtonRef.classList.add("pressed-button")
+        setTimeout(() => FourButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "five":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(5)
-        } else {
-          setExpression((prevText) => prevText + "5") 
-        }
+        appendNumber("5")
+        const FiveButtonRef = document.getElementById("five")
+        FiveButtonRef.classList.add("pressed-button")
+        setTimeout(() => FiveButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "six":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(6)
-        } else {
-          setExpression((prevText) => prevText + "6") 
-        }
+        appendNumber("6")
+        const SixButtonRef = document.getElementById("six")
+        SixButtonRef.classList.add("pressed-button")
+        setTimeout(() => SixButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "seven":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(7)
-        } else {
-          setExpression((prevText) => prevText + "7") 
-        }
+        appendNumber("7")
+        const SevenButtonRef = document.getElementById("seven")
+        SevenButtonRef.classList.add("pressed-button")
+        setTimeout(() => SevenButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "eight":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(8)
-        } else {
-          setExpression((prevText) => prevText + "8") 
-        }
+        appendNumber("8")
+        const EightButtonRef = document.getElementById("eight")
+        EightButtonRef.classList.add("pressed-button")
+        setTimeout(() => EightButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "nine":
-        if (expression.toString().length >= max_length) {
-          setExpression((prevText) => prevText)
-        } else if (expression == 0) {
-          setExpression(9)
-        } else {
-          setExpression((prevText) => prevText + "9") 
-        }
+        appendNumber("9")
+        const NineButtonRef = document.getElementById("nine")
+        NineButtonRef.classList.add("pressed-button")
+        setTimeout(() => NineButtonRef.classList.remove("pressed-button"), 300)
         break;
       default:
-        setExpression(0)
+        setExpression("0")
         break;
     }
   };
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [])
+
+  function handleKeyPress(event) {
+    if (event.keyCode === 48 || event.keyCode === 96) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("zero")
+      buttonRef.click()
+    } else if (event.keyCode === 49 || event.keyCode === 35) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("one")
+      buttonRef.click()
+    } else if (event.keyCode === 50 || event.keyCode === 40) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("two")
+      buttonRef.click()
+    } else if (event.keyCode === 51 || event.keyCode === 34) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("three")
+      buttonRef.click()
+    } else if (event.keyCode === 52 || event.keyCode === 37) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("four")
+      buttonRef.click()
+    } else if (event.keyCode === 53 || event.keyCode === 12) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("five")
+      buttonRef.click()
+    } else if (event.keyCode === 54 || event.keyCode === 39) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("six")
+      buttonRef.click()
+    } else if (event.keyCode === 55 || event.keyCode === 36) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("seven")
+      buttonRef.click()
+    } else if (event.keyCode === 56 || event.keyCode === 38) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("eight")
+      buttonRef.click()
+    } else if (event.keyCode === 57 || event.keyCode === 33) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("nine")
+      buttonRef.click()
+    } else if (event.keyCode === 190 || event.keyCode === 110) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("decimal")
+      buttonRef.click()
+    } else if (event.keyCode === 171 || event.keyCode === 107) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("add")
+      buttonRef.click()
+    } else if (event.keyCode === 175 || event.keyCode === 109) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("subtract")
+      buttonRef.click()
+    } else if (event.keyCode === 0 || event.keyCode === 106) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("multiply")
+      buttonRef.click()
+    } else if (event.keyCode === 174 || event.keyCode === 111) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("divide")
+      buttonRef.click()
+    } else if (event.keyCode === 8 || event.keyCode === 67) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("delete")
+      buttonRef.click()
+    } else if (event.keyCode === 46 || event.keyCode === 65) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("clear")
+      buttonRef.click()
+    } else if (event.keyCode === 13) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("equals")
+      buttonRef.click()
+    }
+  }
+
   return(
     <div className="calculator" id="calculator">
-      <div className="screen" id="display">{expression}</div>
       <div className="grid">
+      <div className="calculator-title">The JavaScript Calculator</div>
+        <div className="screen" id="display">{expression}</div>
         <button className="button" id="clear" onClick={() => handleClick("clear")}>AC</button>
         <button className="button" id="delete" onClick={() => handleClick("delete")}>C</button>
         <button className="button" id="equals" onClick={() => handleClick("equals")}>=</button>
         <button className="button" id="seven" onClick={() => handleClick("seven")}>7</button>
         <button className="button" id="eight" onClick={() => handleClick("eight")}>8</button>
         <button className="button" id="nine" onClick={() => handleClick("nine")}>9</button>
-        <button className="button" id="divide" onClick={() => handleClick("divide")}>/</button>
+        <button className="button" id="divide" onClick={() => handleClick("divide")}>%</button>
         <button className="button" id="four" onClick={() => handleClick("four")}>4</button>
         <button className="button" id="five" onClick={() => handleClick("five")}>5</button>
         <button className="button" id="six" onClick={() => handleClick("six")}>6</button>

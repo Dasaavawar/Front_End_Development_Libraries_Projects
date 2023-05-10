@@ -1,32 +1,80 @@
+.body {
+    justify-content: center;
+    background-color: #A9A9A9;
+}
+
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 120px);
-    gap: 10px;
+    grid-template-columns: repeat(4, 150px);
+    grid-template-rows: auto 50px;
+    gap: 5px;
+    align-items: center;
 }
 
 .calculator {
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    padding: 10%;
+    width: 47.5vw;
+    height: 52.5vh;
+    background-color: #003366;
+    border-radius: 5px;
 }
 
-
-#zero {
+#zero, #equals {
     grid-column-end: span 2;
 }
 
 #equals {
-    grid-column-end: span 2;
+    background-color: #339966;
+}
+
+#zero, #one, #two, #three, #four, #five, #six, #seven, #eight, #nine, #decimal {
+    background-color: #696969;
+}
+
+#add, #subtract, #multiply, #divide {
+    background-color: #000033;
+}
+
+#clear, #delete {
+    background-color: #990000;
+}
+
+#display {
+    grid-column-end: span 4;
+}
+
+.calculator-title {
+    grid-column-end: span 4;
+    color: #FFFFFF;
+    font-size: 36px;
+    justify-content: center;
+    text-align: center;
+}
+
+button {
+    background-color: #A9A9A9;
+    border-radius: 5px;
+    height: 35px;
+    color: #FFFFFF;
+    font-size: 26px;
+    font-family: monospace;
+}
+
+.pressed-button {
+    filter: brightness(0.8);
+    transform: translate(1.5px, 1.5px);
 }
 
 .screen {
-    background-color: black;
-    color: yellowgreen;
-    width: 505px;
+    background-color: #99CC99;
+    color: #000000;
     padding: 2px;
-    font-size: 20px;
-    font-family: 'Dot Matrix', monospace;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    font-size: 26px;
+    font-family: 'alarm clock', sans-serif;
+    border-radius: 2.5px;
+    text-align: right;
+    height: 26px;
 }
