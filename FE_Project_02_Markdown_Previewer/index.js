@@ -49,7 +49,7 @@ const App = () => {
   \n![Hash Hash Hash](http://s2.glbimg.com/AZc21w-7oQOTCP7Rpd2762va1Uw=/e.glbimg.com/og/ed/f/original/2015/05/25/john-nash-abel.jpg)
   \n[Nash man work](https://en.wikipedia.org/wiki/Nash_embedding_theorems)
   \n<p>Do you know him? He is among the <strong>healthiest</strong> mathematics **PhDs**...</p>
-  \n\`<>is this an object?</>\`
+  \n\`<>is this a monad?</>\`
   \` <div>no way!</div> \`
   \`\`\`
   error 404<Component/>
@@ -58,12 +58,12 @@ const App = () => {
   \n This is a the list:
   1. try
   2. while life try
-  3. try harder
+  3. while life try harder
   \n
   The oath:
   > Financially independent retire early, FIRE.
   \n
-  \n***Your flesh is a relic***`;
+  \n***Nightwalk***`;
   const [text, setText] = React.useState(defaultText)
   
   function handleText(event) {
