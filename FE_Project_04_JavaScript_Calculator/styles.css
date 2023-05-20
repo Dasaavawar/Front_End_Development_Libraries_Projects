@@ -1,14 +1,14 @@
-.body {
-    justify-content: center;
-    background-color: #A9A9A9;
+body {
+    background: radial-gradient(circle at center, #D3D3D3, #B0C4DE);
+    position: relative;
 }
 
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 150px);
-    grid-template-rows: auto 50px;
-    gap: 5px;
+    grid-template-columns: repeat(4, 120px);
+    grid-template-rows: auto 65px;
+    gap: 8px;
     align-items: center;
 }
 
@@ -16,10 +16,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 47.5vw;
-    height: 52.5vh;
-    background-color: #003366;
-    border-radius: 5px;
+    width: 530px;
+    height: 415px;
+    background-color: #000080;
+    border-radius: 10px;
+    border-width: 6px;
+    border: 8px outset #00008B;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 15vh;
+    left: 30vw;
 }
 
 #zero, #equals {
@@ -35,7 +41,7 @@
 }
 
 #add, #subtract, #multiply, #divide {
-    background-color: #000033;
+    background-color: #4682B4;
 }
 
 #clear, #delete {
@@ -52,15 +58,17 @@
     font-size: 36px;
     justify-content: center;
     text-align: center;
+    -webkit-text-stroke: 1px #000000;
 }
 
 button {
     background-color: #A9A9A9;
     border-radius: 5px;
-    height: 35px;
+    height: 45px;
     color: #FFFFFF;
     font-size: 26px;
     font-family: monospace;
+    -webkit-text-stroke: 0.5px #000000;
 }
 
 .pressed-button {
@@ -74,7 +82,8 @@ button {
     padding: 2px;
     font-size: 26px;
     font-family: 'alarm clock', sans-serif;
-    border-radius: 2.5px;
     text-align: right;
     height: 26px;
+    border-radius: 3.5px;
+    border: 2.5px inset #A9A9A9;
 }

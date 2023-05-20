@@ -259,10 +259,10 @@ const Drums = (props) => {
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   const playSequence = async () => {
-    let i = 0;
+    let i = 0
     while (remixRef.current && i < sequence.length) {
-      const keyTrigger = sequence[i];
-      const note = props.bank.find((note) => note.keyTrigger === keyTrigger);
+      const keyTrigger = sequence[i]
+      const note = props.bank.find((note) => note.keyTrigger === keyTrigger)
       if (note) {
         caseRef.current = i % 4
         setCaseAnimation(caseRef)
@@ -281,9 +281,9 @@ const Drums = (props) => {
 
   const handleRemix = () => {
     if (remix) {
-      setRemix(false);
+      setRemix(false)
     } else {
-      setRemix(true);
+      setRemix(true)
     }
   };
 

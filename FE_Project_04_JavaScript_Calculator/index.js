@@ -4,7 +4,7 @@ const App = () => {
   const [expression, setExpression] = useState('0')
 
   const regex = /[+\-*/]{2}$/
-  const max_length = 40
+  const max_length = 32
 
   const appendNumber = (number) => {
     if (expression.toString().length >= max_length) {
@@ -277,7 +277,7 @@ const App = () => {
   return(
     <div className="calculator" id="calculator">
       <div className="grid">
-      <div className="calculator-title">The JavaScript Calculator</div>
+      <div className="calculator-title">Numpad Calculator</div>
         <div className="screen" id="display">{expression}</div>
         <button className="button" id="clear" onClick={() => handleClick("clear")}>AC</button>
         <button className="button" id="delete" onClick={() => handleClick("delete")}>C</button>
