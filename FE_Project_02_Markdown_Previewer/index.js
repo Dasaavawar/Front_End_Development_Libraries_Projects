@@ -31,7 +31,7 @@ const Render = ({text}) => {
 
 const App = () => {
 
-  const defaultText = `# Welcome to The Markrix!
+  const defaultText = `# Welcome to The Markdown!
   ## React vibes...
   \n<code>import neo as neo
   from * import assembly, fortran, shell, haskell, qiskit, c++, etc...</code>
@@ -72,7 +72,7 @@ const App = () => {
   
   return(
     <div>
-      <div className="app-title"><h1>The Marktrix</h1></div>
+      <div className="app-title"><h1>The Markdown</h1></div>
       <div className="app-container">
       <Console text={text} handleText={handleText}/>
       <Render text={text}/>
