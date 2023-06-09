@@ -1,4 +1,4 @@
-const {useState, useEffect, useRef} = React;
+const {useState, useEffect, useRef, createRef} = React;
 
 const bankOne = [
   {
@@ -160,54 +160,122 @@ const Pad = ({note, volumeBar, onDisplayChange, onSequenceChange}) => {
 }
 
 const Drums = (props) => {
-  const [displayText, setDisplayText] = useState('Play note')
-  const [sequence, setSequence] = useState(Array(24).fill("M"))
-  const [remix, setRemix] = useState(false)
-  const remixRef = useRef(remix)
 
   const [volume, setVolume] = useState(1)
-  const volumeRef = useRef(volume)
   const [speed, setSpeed] = useState(1750)
-  const speedRef = useRef(speed)
-
   const [caseAnimation, setCaseAnimation] = useState(0)
+  
+  const volumeRef = useRef(volume)
+  const speedRef = useRef(speed)
   const caseRef = useRef(caseAnimation)
 
-  const [toggledBank, setToggledBank] = useState(false)
+  useEffect(() => {
+    setVolume(props.volumeBar)
+    setSpeed(props.remixSpeed)
+    speedRef.current = speed
+    volumeRef.current = volume
+  }, [props.volumeBar, props.remixSpeed, speed, speedRef, volume, volumeRef])
+  
+  useEffect(() => {
+    props.setRemix(props.remix);
+    props.remixRef.current = props.remix;
+    playSequence(props.remix);
+  }, [props.remix, props.remixRef, props.setRemix])
 
   useEffect(() => {
-    if (props.powerSwitch || !props.powerSwitch) {
-      setDisplayText('Play note')
+    props.onRefFromDrum(caseRef.current)
+  }, [props.onRefFromDrum])
+
+  const playNote = (note) => {
+    const audioTag = document.getElementById(String.fromCharCode(note.keyCode))
+    audioTag.currentTime = 0
+    audioTag.volume = volumeRef.current
+    audioTag.play()
+    props.setDisplayText(note.id)
+    const buttonRef = document.getElementById(note.id)
+    buttonRef.classList.add("played-button")
+    setTimeout(() => buttonRef.classList.remove("played-button"), 200)
+  }
+
+  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  let i = 0
+  const playSequence = async () => {
+    i = props.padRefs.current
+    while (props.remixRef.current && i < props.sequence.length) {
+      props.padRefs.current = i
+      const keyTrigger = props.sequence[i]
+      const note = props.bank.find((note) => note.keyTrigger === keyTrigger)
+      if (note) {
+        playNote(note)
+        setCaseAnimation(caseRef)
+      }
+      else if (!note) {
+        props.handleDisplayChange("Muted-Note")
+        props.handleButtonClick("muted-note")
+        setCaseAnimation(caseRef)
+      }
+      caseRef.current = i % 4
+      i = (i + 1) % props.sequence.length
+      await wait(speedRef.current)
+    }
+  }
+
+  return(
+    <div>
+      <div className="drum-grid">
+      {Array.from({length: 9}, (_, i) => (
+      <Pad
+      key={props.bank[i].id}
+      note={props.bank[i]}
+      volumeBar={props.powerSwitch ? props.volumeBar : 0}
+      onDisplayChange={props.handleDisplayChange}
+      onSequenceChange={props.handleSequenceChange}
+      sequence={props.sequence}
+      bank={props.bank}
+      />
+      ))}
+      </div>
+    </div>
+  )
+}
+
+const App = () => {
+
+  const [volumeBar, setVolumeBar] = useState(1)
+  const [remixSpeed, setRemixSpeed] = useState(1750)
+  const [bank, setBank] = useState(false)
+  const [powerSwitch, setPowerSwitch] = useState(true)
+  const [displayText, setDisplayText] = useState('Play-a-Pad')
+  const [sequence, setSequence] = useState(Array(24).fill("M"))
+  const [remix, setRemix] = useState(false)
+  const [sequencerNote, setSequencerNote] = useState(false)
+
+  const remixRef = useRef(false)
+  const drumRef = useRef(null)
+  const padRefs = useRef(0)
+
+  console.log('padRefs', padRefs.current)
+
+  useEffect(() => {
+    if (powerSwitch) {
+      setVolumeBar(1)
+      setRemixSpeed(1750)
+      setSequencerNote(false)
+    } else if (!powerSwitch) {
+      setVolumeBar(0)
+      setRemixSpeed(3000)
+      setSequencerNote(false)
+    }
+  }, [powerSwitch])
+
+  useEffect(() => {
+    if (powerSwitch || !powerSwitch) {
+      setDisplayText('Play-a-Pad')
       setSequence(Array(24).fill("M"))
       setRemix(false)
     }
-  }, [props.powerSwitch])
-
-  useEffect(() => {
-    setToggledBank(props.toggleBank)
-  }, [props.toggleBank])
-
-  const handleDisplayChange = (value) => {
-    if (props.powerSwitch) {
-      setDisplayText(value)
-    } else if (!props.powerSwitch) {
-      setDisplayText("")
-    }    
-  }
-
-  const handleSequenceChange = (value) => {
-    if (props.powerSwitch && (remixRef.current == false)) {
-      setSequence(prevCounting => {
-        if (prevCounting.length >= 24) {
-          return [...prevCounting.slice(1), value]
-        } else {
-          return [...prevCounting, value]
-        }
-      })
-    } else if (!props.powerSwitch) {
-      setSequence(Array(24).fill(" "))
-    }
-  }
+  }, [powerSwitch])
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress)
@@ -216,8 +284,76 @@ const Drums = (props) => {
     }
   }, [])
 
+  const handleRemix = () => {
+    if (remix) {
+      setRemix(false)
+    } else {
+      setRemix(true)
+    }
+  }
+  
+  const handleButtonClick = (id) => {
+    const buttonRef = document.getElementById(id)
+    buttonRef.classList.add("pressed-button")
+    setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
+  }
+
+  const handleDisplayChange = (value) => {
+    if (powerSwitch) {
+      setDisplayText(value)
+    } else if (!powerSwitch) {
+      setDisplayText("")
+    }    
+  }
+
+  const handleSequenceChange = (value) => {
+    if (powerSwitch && (remixRef.current == false)) {
+      setSequence(prevCounting => {
+        if (prevCounting.length >= 24) {
+          return [...prevCounting.slice(1), value]
+        } else {
+          return [...prevCounting, value]
+        }
+      })
+    } else if (!powerSwitch) {
+      setSequence(Array(24).fill(" "))
+    }
+  }
+
+  const handleDrumRef = (childRef) => {
+    drumRef.current = childRef
+  }
+
   function handleKeyPress(event) {
-    if (event.keyCode === 77) {
+     if (event.keyCode === 86) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("power")
+      buttonRef.click()
+    } else if (event.keyCode === 73) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("heater-kit-button")
+      buttonRef.click()
+    } else if (event.keyCode === 79) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("smooth-piano-kit-button")
+      buttonRef.click()
+    } else if (event.keyCode === 71) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("dec-volume")
+      buttonRef.click()
+    } else if (event.keyCode === 72) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("inc-volume")
+      buttonRef.click()
+    } else if (event.keyCode === 74) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("dec-remix")
+      buttonRef.click()
+    } else if (event.keyCode === 75) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("inc-remix")
+      buttonRef.click()
+    } else if (event.keyCode === 77) {
       event.preventDefault()
       const buttonRef = document.getElementById("muted-note")
       buttonRef.click()
@@ -232,193 +368,94 @@ const Drums = (props) => {
     }
   }
 
-  useEffect(() => {
-    setVolume(props.volumeBar)
-    setSpeed(props.remixSpeed)
-    speedRef.current = speed
-    volumeRef.current = volume
-  }, [props.volumeBar, props.remixSpeed, speed, speedRef, volume, volumeRef])
-  
-  useEffect(() => {
-    setRemix(remix);
-    remixRef.current = remix;
-    playSequence(remix);
-  }, [remix, remixRef, setRemix]);
-
-  const playSound = (note) => {
-    const audioTag = document.getElementById(String.fromCharCode(note.keyCode))
-    audioTag.currentTime = 0
-    audioTag.volume = volumeRef.current
-    audioTag.play()
-    setDisplayText(note.id)
-    const buttonRef = document.getElementById(note.id)
-    buttonRef.classList.add("pressed-button")
-    setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
-  }
-
-  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-  const playSequence = async () => {
-    let i = 0
-    while (remixRef.current && i < sequence.length) {
-      const keyTrigger = sequence[i]
-      const note = props.bank.find((note) => note.keyTrigger === keyTrigger)
-      if (note) {
-        caseRef.current = i % 4
-        setCaseAnimation(caseRef)
-        playSound(note)
-      }
-      else {
-        caseRef.current = i % 4
-        setCaseAnimation(caseRef)
-        handleDisplayChange("Muted-Note")
-        props.handleButtonClick("muted-note")
-      }
-      i = (i + 1) % sequence.length
-      await wait(speedRef.current)
-    }
-  }
-
-  const handleRemix = () => {
-    if (remix) {
-      setRemix(false)
-    } else {
-      setRemix(true)
-    }
-  };
-
   return(
-    <div className="machine">
-      <div id="display-part">
-        <div id="display-title">DISPLAY NOTE</div>
-        <div id="display">{props.powerSwitch && displayText}</div>
+    <div id="drum-machine">
+
+      <div id="main-title">DRUM MIXER MACHINE</div>
+
+      <div id="sequencer-part">
+        <div id="sequencer-title">NOTE SEQUENCER DISPLAY</div>
+        <div id="display">
+          {sequence.map((n, i) => (
+            <div id="sequencer-display" key={i} style={i === padRefs.current && sequencerNote ? { color: 'mediumorchid' } : { color: 'teal' }}>{powerSwitch && n}</div>
+          ))}
+        </div>
       </div>
-      <div id="display-part">
-        <div id="display-title">DISPLAY STATUS</div>
-        <div id="display">{props.powerSwitch && (remix ?  (<>{caseRef.current == 0 ? <>Playing</> : caseRef.current == 1 ? <>Playing.</> : caseRef.current == 2 ? <>Playing..</> : caseRef.current == 3 ? <>Playing...</> : null}</>) : <>Ready</>)}</div>
+
+      <div id="drum-part">
+        <div id="drum-title">DRUM PADS</div>
+        <div id="drum-pads">
+        {bank
+        ? <Drums bank={bankOne} volumeBar={volumeBar} remixSpeed={remixSpeed} powerSwitch={powerSwitch} setDisplayText={setDisplayText}
+        sequence={sequence} setSequence={setSequence} remix={remix} setRemix={setRemix} remixRef={remixRef} padRefs={padRefs}
+        onRefFromDrum={handleDrumRef} handleDisplayChange={handleDisplayChange} handleSequenceChange={handleSequenceChange} handleButtonClick={handleButtonClick} />
+        : <Drums bank={bankTwo} volumeBar={volumeBar} remixSpeed={remixSpeed} powerSwitch={powerSwitch} setDisplayText={setDisplayText}
+        sequence={sequence} setSequence={setSequence} remix={remix} setRemix={setRemix} remixRef={remixRef} padRefs={padRefs}
+        onRefFromDrum={handleDrumRef} handleDisplayChange={handleDisplayChange} handleSequenceChange={handleSequenceChange} handleButtonClick={handleButtonClick} />}
+        </div>
       </div>
-      <div className="grid">
-      {Array.from({length: 9}, (_, i) => (
-      <Pad
-      key={props.bank[i].id}
-      note={props.bank[i]}
-      volumeBar={props.powerSwitch ? props.volumeBar : 0}
-      onDisplayChange={handleDisplayChange}
-      onSequenceChange={handleSequenceChange}
-      sequence={sequence}
-      bank={props.bank}
-      />
-      ))}
+
+      <div id="note-part">
+        <div id="note-title">NOTE DISPLAY</div>
+        <div id="note-display">{powerSwitch && displayText}</div>
+      </div>
+
+      <div id="status-part">
+        <div id="status-title">STATUS DISPLAY</div>
+          <div id="status-display">{powerSwitch && (remix
+          ? (<>{drumRef.current == 0 
+          ? <>Playing</>
+          : drumRef.current == 1 ? <>Playing.</>
+          : drumRef.current == 2 ? <>Playing..</>
+          : drumRef.current == 3 ? <>Playing...</>
+          : null}</>)
+          : <>Ready</>)}
+          </div>
+      </div>
+
+      <div id="set-remix-part">
+        <div id="set-remix-title">SET REMIX</div>
+        <div id="set-remix-display">{powerSwitch && <>Reset S. - Play/Pause - M. Note</>}</div>
+        <div id="set-remix-buttons">
+          <button id="reset" onClick={() => {setRemix(false); padRefs.current = 0; setSequence(Array(24).fill("M")); handleButtonClick("reset")}}>R</button>
+          <button id="play-pause" onClick={() => {setSequencerNote(true); handleRemix(); handleButtonClick("play-pause")}}>Y</button>
+          <button id="muted-note" onClick={() => {handleSequenceChange("M"); handleDisplayChange("Muted-Note"); handleButtonClick("muted-note")}}>M</button>
+        </div>
       </div>
       
-      <div>
-      <h2>Repeater:</h2>
-      {props.toggleBank}      
-      <div id="repeater">{sequence}
-      <button id="reset" onClick={() => {setRemix(false); setSequence(Array(24).fill(" ")); props.handleButtonClick("reset")}}>(R) Reset</button>
-      <button id="muted-note" onClick={() => {handleSequenceChange("M"); handleDisplayChange("Muted-Note"); props.handleButtonClick("muted-note")}}>(M) Muted note</button>
-      <button id="play-pause" onClick={() => {handleRemix(); props.handleButtonClick("play-pause")}}>(Y) {remix ? <>Pause</> : <>Play</>}</button>
+      <div id="set-kit-part">
+        <div id="set-kit-title">SET KIT</div>
+        <div id="set-kit-display">{powerSwitch ? <>{bank ? <>Heater Band Kit</> : <>Smooth Piano Kit</>}</> : <></>}</div>
+        <div id="set-kit-buttons">
+          <button id="heater-kit-button" onClick={() => {setRemix(false); setBank(true); handleButtonClick("heater-kit-button")}}>I</button>
+          <button id="smooth-piano-kit-button" onClick={() => {setRemix(false); setBank(false); handleButtonClick("smooth-piano-kit-button")}}>O</button>
+        </div>
       </div>
+
+      <div id="set-volume-part">
+        <div id="set-volume-title">SET VOLUME</div>
+        <div id="set-volume-display">{powerSwitch && <>Machines Volume: {Math.round(volumeBar * 100)} %</>}</div>
+        <div id="set-volume-buttons">
+          <button id="dec-volume" onClick={() => {setVolumeBar(prevVolume => Math.max(0, prevVolume - 0.05)); handleButtonClick("dec-volume")}} disabled={!powerSwitch}>G</button>
+          <button id="inc-volume" onClick={() => {setVolumeBar(prevVolume => Math.min(1, prevVolume + 0.05)); handleButtonClick("inc-volume")}} disabled={!powerSwitch}>H</button>
+        </div>
       </div>
-    </div>
-  )
-}
 
-const App = () => {
-
-  const [volumeBar, setVolumeBar] = useState(1)
-  const [remixSpeed, setRemixSpeed] = useState(1750)
-  const [bank, setBank] = useState(false)
-  const [toggleBank, setToggleBank] = useState(false)
-  const [powerSwitch, setPowerSwitch] = useState(true)
-
-  useEffect(() => {
-    if (powerSwitch) {
-      setVolumeBar(1)
-      setRemixSpeed(1750)
-    } else if (!powerSwitch) {
-      setVolumeBar(0)
-      setRemixSpeed(3000)
-    }
-  }, [powerSwitch])
-
-  useEffect(() => {
-    setToggleBank(bank)
-  }, [bank])
-  
-  const handleButtonClick = (id) => {
-    const buttonRef = document.getElementById(id)
-    buttonRef.classList.add("pressed-button")
-    setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
-  }
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress)
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [])
-
-  function handleKeyPress(event) {
-    if (event.keyCode === 97 || event.keyCode === 49) {
-      event.preventDefault()
-      const buttonRef = document.getElementById("heater-kit-button")
-      buttonRef.click()
-    } else if (event.keyCode === 98 || event.keyCode === 50) {
-      event.preventDefault()
-      const buttonRef = document.getElementById("smooth-piano-kit-button")
-      buttonRef.click()
-    } else if (event.keyCode === 86) {
-      event.preventDefault()
-      const buttonRef = document.getElementById("power")
-      buttonRef.click()
-    } else if (event.keyCode === 71) {
-      event.preventDefault()
-      const buttonRef = document.getElementById("dec-volume")
-      buttonRef.click()
-    } else if (event.keyCode === 72) {
-      event.preventDefault()
-      const buttonRef = document.getElementById("inc-volume")
-      buttonRef.click()
-    } else if (event.keyCode === 75) {
-      event.preventDefault()
-      const buttonRef = document.getElementById("dec-remix")
-      buttonRef.click()
-    } else if (event.keyCode === 74) {
-      event.preventDefault()
-      const buttonRef = document.getElementById("inc-remix")
-      buttonRef.click()
-    }
-  }
-
-  return(
-    <div className="title" id="drum-machine">
-          
-      <h2>Drum Machine</h2>
-      <div id="kit-part">
-        <div id="kit-title">DISPLAY KIT</div>
-        <div id="kit-display">{powerSwitch ? <>{bank ? <>Heater Band Kit</> : <>Smooth Piano Kit</>}</> : <></>}</div>
+      <div id="set-speed-part">
+        <div id="set-speed-title">SET SPEED</div>
+        <div id="set-speed-display">{powerSwitch && <>Remix Speed: {remixSpeed} ms</>}</div>
+        <div id="set-speed-buttons">
+          <button id="dec-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.min(3000, prevSpeed + 50)); handleButtonClick("dec-remix")}} disabled={!powerSwitch}>J</button>
+          <button id="inc-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.max(50, prevSpeed - 50)); handleButtonClick("inc-remix")}} disabled={!powerSwitch}>K</button>        
+        </div>
+      </div>      
+      
+      <div id="power-part">
+        <div id="power-title">POWER</div>
+        <div id="power-button">
+          <button id="power" onClick={() => {setPowerSwitch(!powerSwitch); setSequencerNote(!sequencerNote); padRefs.current = 0; handleButtonClick("power")}}>V</button>
+        </div>
       </div>
-      {bank ? <Drums bank={bankOne} volumeBar={volumeBar} remixSpeed={remixSpeed} powerSwitch={powerSwitch} toggleBank={toggleBank} handleButtonClick={handleButtonClick}/>
-      : <Drums bank={bankTwo} volumeBar={volumeBar} remixSpeed={remixSpeed} powerSwitch={powerSwitch} toggleBank={toggleBank} handleButtonClick={handleButtonClick}/>}
-      <h2>Change to:</h2>
-      <button id="heater-kit-button" onClick={() => {setBank(true); handleButtonClick("heater-kit-button")}}>(1) Heater Kit</button>
-      <button id="smooth-piano-kit-button" onClick={() => {setBank(false); handleButtonClick("smooth-piano-kit-button")}}>(2) Piano Kit</button>
-      <h2>Volume ({Math.round(volumeBar * 100)})</h2>
-      <button id="dec-volume" onClick={() => {setVolumeBar(prevVolume => Math.max(0, prevVolume - 0.05)); handleButtonClick("dec-volume")}} disabled={!powerSwitch}>(G) dec. volume</button>
-      <button id="inc-volume" onClick={() => {setVolumeBar(prevVolume => Math.min(1, prevVolume + 0.05)); handleButtonClick("inc-volume")}} disabled={!powerSwitch}>(H) inc. volume</button>
-      <input id="volume-bar" type="range" step="0.01" onChange={(e) => setVolumeBar(+e.target.value)} value={volumeBar} max="1" min="0" className="w-50" disabled={!powerSwitch}/>
-      <h2>Remix speed ({remixSpeed} ms)</h2>
-      <button id="inc-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.max(50, prevSpeed - 50)); handleButtonClick("inc-remix")}} disabled={!powerSwitch}>(J) inc. remix</button>
-      <button id="dec-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.min(3000, prevSpeed + 50)); handleButtonClick("dec-remix")}} disabled={!powerSwitch}>(K) dec. remix</button>
-      <input id="remix-speed" type="range" step="10" onChange={(e) => setRemixSpeed(+e.target.value)} value={remixSpeed} min="50" max="3000" className="w-50" disabled={!powerSwitch}/>
-      <h2>(V) Power switch</h2>
-      ON
-      <label className="switch">
-        <input type="checkbox" onClick={() => {setPowerSwitch(!powerSwitch); handleButtonClick("power")}} id="power"/>
-        <span className="slider"></span>
-      </label>
-      OFF
     </div>
   )
 }
