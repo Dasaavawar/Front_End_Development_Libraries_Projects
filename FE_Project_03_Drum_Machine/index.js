@@ -5,55 +5,55 @@ const bankOne = [
     keyCode: 81,
     keyTrigger: 'Q',
     id: 'Heater-1',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'
+    url: './sounds/bankOne/Heater-1.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'
   },
   {
     keyCode: 87,
     keyTrigger: 'W',
     id: 'Heater-2',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'
+    url: './sounds/bankOne/Heater-2.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'
   },
   {
     keyCode: 69,
     keyTrigger: 'E',
     id: 'Heater-3',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3'
+    url: './sounds/bankOne/Heater-3.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3'
   },
   {
     keyCode: 65,
     keyTrigger: 'A',
     id: 'Heater-4',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3'
+    url: './sounds/bankOne/Heater-4_1.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3'
   },
   {
     keyCode: 83,
     keyTrigger: 'S',
     id: 'Clap',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3'
+    url: './sounds/bankOne/Heater-6.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3'
   },
   {
     keyCode: 68,
     keyTrigger: 'D',
     id: 'Open-HH-1',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3'
+    url: './sounds/bankOne/Dsc_Oh.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3'
   },
   {
     keyCode: 90,
     keyTrigger: 'Z',
     id: "Kick-n'-Hat",
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'
+    url: './sounds/bankOne/Kick_n_Hat.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'
   },
   {
     keyCode: 88,
     keyTrigger: 'X',
     id: 'Kick',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3'
+    url: './sounds/bankOne/RP4_KICK_1.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3'
   },
   {
     keyCode: 67,
     keyTrigger: 'C',
     id: 'Closed-HH-1',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
+    url: './sounds/bankOne/Cev_H2.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
   }
 ];
 
@@ -62,55 +62,55 @@ const bankTwo = [
     keyCode: 81,
     keyTrigger: 'Q',
     id: 'Chord-1',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3'
+    url: './sounds/bankTwo/Chord_1.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3'
   },
   {
     keyCode: 87,
     keyTrigger: 'W',
     id: 'Chord-2',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3'
+    url: './sounds/bankTwo/Chord_2.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3'
   },
   {
     keyCode: 69,
     keyTrigger: 'E',
     id: 'Chord-3',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3'
+    url: './sounds/bankTwo/Chord_3.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3'
   },
   {
     keyCode: 65,
     keyTrigger: 'A',
     id: 'Shaker',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3'
+    url: './sounds/bankTwo/Give_us_a_light.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3'
   },
   {
     keyCode: 83,
     keyTrigger: 'S',
     id: 'Open-HH-2',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3'
+    url: './sounds/bankTwo/Dry_Ohh.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3'
   },
   {
     keyCode: 68,
     keyTrigger: 'D',
     id: 'Closed-HH-2',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3'
+    url: './sounds/bankTwo/Bld_H1.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3'
   },
   {
     keyCode: 90,
     keyTrigger: 'Z',
     id: 'Punchy-Kick',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3'
+    url: './sounds/bankTwo/punchy_kick_1.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3'
   },
   {
     keyCode: 88,
     keyTrigger: 'X',
     id: 'Side-Stick',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3'
+    url: './sounds/bankTwo/side_stick_1.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3'
   },
   {
     keyCode: 67,
     keyTrigger: 'C',
     id: 'Snare',
-    url: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
+    url: './sounds/bankTwo/Brk_Snr.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
   }
 ];
 
@@ -246,7 +246,7 @@ const App = () => {
   const [remixSpeed, setRemixSpeed] = useState(1750)
   const [bank, setBank] = useState(false)
   const [powerSwitch, setPowerSwitch] = useState(true)
-  const [displayText, setDisplayText] = useState('Play-a-Pad')
+  const [displayText, setDisplayText] = useState('Press-a-Key!')
   const [sequence, setSequence] = useState(Array(24).fill("M"))
   const [remix, setRemix] = useState(false)
   const [sequencerNote, setSequencerNote] = useState(false)
@@ -271,7 +271,7 @@ const App = () => {
 
   useEffect(() => {
     if (powerSwitch || !powerSwitch) {
-      setDisplayText('Play-a-Pad')
+      setDisplayText('Press-a-Key!')
       setSequence(Array(24).fill("M"))
       setRemix(false)
     }
@@ -293,9 +293,15 @@ const App = () => {
   }
   
   const handleButtonClick = (id) => {
-    const buttonRef = document.getElementById(id)
-    buttonRef.classList.add("pressed-button")
-    setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
+    if (id == "power") {
+      const buttonRef = document.getElementById(id)
+      buttonRef.classList.add("pressed-power-button")
+      setTimeout(() => buttonRef.classList.remove("pressed-power-button"), 200)
+    } else {
+      const buttonRef = document.getElementById(id)
+      buttonRef.classList.add("pressed-button")
+      setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
+    }
   }
 
   const handleDisplayChange = (value) => {
@@ -329,6 +335,7 @@ const App = () => {
       event.preventDefault()
       const buttonRef = document.getElementById("power")
       buttonRef.click()
+    setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
     } else if (event.keyCode === 73) {
       event.preventDefault()
       const buttonRef = document.getElementById("heater-kit-button")
@@ -374,10 +381,10 @@ const App = () => {
       <div id="main-title">DRUM MIXER MACHINE</div>
 
       <div id="sequencer-part">
-        <div id="sequencer-title">NOTE SEQUENCER DISPLAY</div>
+        <div id="sequencer-title">NOTES SEQUENCER DISPLAY</div>
         <div id="display">
           {sequence.map((n, i) => (
-            <div id="sequencer-display" key={i} style={i === padRefs.current && sequencerNote ? { color: 'mediumorchid' } : { color: 'teal' }}>{powerSwitch && n}</div>
+            <div id="sequencer-display" key={i} style={i === padRefs.current && sequencerNote ? { color: 'mediumorchid' } : { color: 'forestgreen' }}>{powerSwitch && n}</div>
           ))}
         </div>
       </div>

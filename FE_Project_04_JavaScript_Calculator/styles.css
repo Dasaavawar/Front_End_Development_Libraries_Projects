@@ -3,7 +3,6 @@ body {
     position: relative;
 }
 
-
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 120px);
@@ -40,7 +39,7 @@ body {
     background-color: #696969;
 }
 
-#sum, #subtract, #multiply, #divide {
+#add, #subtract, #multiply, #divide {
     background-color: #4682B4;
 }
 

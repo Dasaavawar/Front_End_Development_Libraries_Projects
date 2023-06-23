@@ -19,8 +19,10 @@
   body {
     font-family: sans-serif;
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 240px;
+    height: 100%;
     justify-content: center;
     align-items: center;
     background-color: var(--background-second-color);
@@ -29,25 +31,25 @@
   }
   
   #app {
-    height: 100vh;
+    height: 100%;
   }
 
   .app-title {
-    position: fixed;
-    top: 0;
+    display: flex;
+    flex-shrink: 0;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
     color: var(--background-first-color);
     font-family: sans-serif;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   }
 
   .app-title h1 {
-    margin: 0;
+    margin: 5%;
+    font-size: 24px;
   }
 
   .app-title h1::selection {
@@ -56,31 +58,34 @@
   }
 
   .app-container {
-    position: fixed;
+    display: flex;
+    flex-shrink: 0;
+    position: absolute;
     bottom: 0;
     left: 0;
-    width: 100vw;
-    height: 90vh;
+    width: 100%;
+    height: 90%;
     background-color: var(--console-second-color);
-    display: flex;
     justify-content: center;
     align-items: center;
   }
   
   .console-container {
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
-    height: 90vh;
-    position: fixed;
+    position: absolute;
+    height: 100%;
     bottom: 0;
     left: 0;
-    width: 50vw;
+    width: 50%;
     overflow: hidden;
   }
 
   .console-title-bar {
     height: 20px;
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
     background-color: var(--console-first-color);
@@ -144,18 +149,20 @@
   
   .render-container {
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
-    height: 90vh;
-    position: fixed;
+    position: absolute;
+    height: 100%;
     bottom: 0;
     right: 0;
-    width: 50vw;
+    width: 50%;
     overflow: hidden;
   }
   
   .render-title-bar {
     height: 20px;
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
     background-color: var(--render-first-color);
@@ -230,30 +237,45 @@
     display: block !important;
   }
 
-  @media screen and (max-width: 382px) {
+  @media screen and (max-width: 450px) {
     .app-title h1 {
       white-space: nowrap;
     }
 
+    .app-container {
+      display: flex;
+      flex-shrink: 0;
+      position: absolute;
+      top: 10%;
+      left: 0;
+      width: 100%;
+      height: 90%;
+      background-color: var(--console-second-color);
+      justify-content: center;
+      align-items: center;
+    }
+
     .console-container {
       display: flex;
+      flex-shrink: 0;
       flex-direction: column;
-      height: 45vh;
-      position: fixed;
+      position: absolute;
+      height: 50%;
+      top: 0;
       left: 0;
-      top: 10vh;
-      width: 100vw;
+      width: 100%;
       overflow: hidden;
     }
 
     .render-container {
       display: flex;
+      flex-shrink: 0;
       flex-direction: column;
-      height: 45vh;
-      position: fixed;
+      position: absolute;
+      height: 50%;
       bottom: 0;
       left: 0;
-      width: 100vw;
+      width: 100%;
       overflow: hidden;
     }
-  }  
+  }
