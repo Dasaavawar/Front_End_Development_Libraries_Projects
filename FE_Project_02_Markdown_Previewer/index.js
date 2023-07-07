@@ -1,4 +1,6 @@
-const {useState} = React;
+const { createRoot } = ReactDOM
+
+const {useState} = React
 
 marked.setOptions({
   breaks: true  
@@ -11,7 +13,7 @@ const Console = ({text, handleText}) => {
     <>
     <div className="console-container">
     <div className="console-title-bar"><h2>Console</h2></div>
-    <textarea id="editor" className="console-content" spellCheck={false} onChange={handleText}>{text}</textarea>
+    <textarea id="editor" className="console-content" spellCheck={false} onChange={handleText} defaultValue={text}></textarea>
     </div>
     </>
   )}
@@ -31,8 +33,8 @@ const Render = ({text}) => {
 
 const App = () => {
 
-  const defaultText = `# Welcome to The Markdown!
-  ## React vibes...
+  const defaultText = `# Welcome to The Markdown Previewer!
+  ## ReactJS vibes...
   \n<code>import neo as neo
   from * import assembly, fortran, shell, haskell, qiskit, c++, etc...</code>
   \n<h1>Neo is typing...</h1>
@@ -55,7 +57,7 @@ const App = () => {
   error 404<Component/>
   \`\`\`
   \n
-  \n This is a the list:
+  \n To do list:
   1. try
   2. while life try
   3. while life try harder
@@ -72,7 +74,7 @@ const App = () => {
   
   return(
     <div>
-      <div className="app-title"><h1>The Markdown</h1></div>
+      <div className="app-title"><h1>The Markdown Previewer</h1></div>
       <div className="app-container">
       <Console text={text} handleText={handleText}/>
       <Render text={text}/>
@@ -81,4 +83,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("app"))
+createRoot(document.getElementById("root")).render(<App />)

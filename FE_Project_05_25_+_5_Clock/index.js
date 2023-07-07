@@ -199,14 +199,15 @@ const App = () => {
     <div>        
         <audio id="beep" ref={audioRef} src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"/>
 
-        <div id='clock-grid'>
+        <div id='apple'></div>
+
+        <div id="clock-grid">
         <div id="main-title">Pomodoro Clock</div>
 
           <div id="time-part">
-            <div id="time-label">Session time</div>
+            <div id="time-label">Session Time</div>
             <div id="time-left">{clockForm(sessionTime)}</div>
-            <button id="start_stop" onClick={handleStartStop}>(W) Start/Stop</button>
-            <button id="reset" onClick={() => resetTimer()}>(R) Reset</button>
+            Start/Stop <button id="start_stop" onClick={handleStartStop}>W</button><button id="reset" onClick={() => resetTimer()}>R</button> Reset
           </div>
           
           <div id="status-part">
@@ -214,17 +215,15 @@ const App = () => {
           </div>
 
           <div id="break-part">
-            <div id="break-label">Break lenght</div>
+            <div id="break-label">Break Lenght</div>
             <div id="break-length">{breakLength}</div>
-            <button id="break-decrement" onClick={() => breakDecrease()}>(Y) Break decrease</button>
-            <button id="break-increment" onClick={() => breakIncrease()}>(U) Break increase</button>
+            Decrease <button id="break-decrement" onClick={() => breakDecrease()}>Y</button><button id="break-increment" onClick={() => breakIncrease()}>U</button> Increase
           </div>
 
           <div id="session-part">
-            <div id="session-label">Session length</div>
+            <div id="session-label">Session Length</div>
             <div id="session-length">{sessionLength}</div>
-            <button id="session-decrement" onClick={() => sessionDecrease()}>(J) Session decrease</button>
-            <button id="session-increment" onClick={() => sessionIncrease()}>(K) Session increase</button>
+            Decrease <button id="session-decrement" onClick={() => sessionDecrease()}>J</button><button id="session-increment" onClick={() => sessionIncrease()}>K</button> Increase
           </div>
         </div>
     </div>

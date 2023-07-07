@@ -1,4 +1,6 @@
-const {useState, useEffect} = React;
+const { createRoot } = ReactDOM
+
+const {useState, useEffect} = React
 
 const QuoteBox = () => {
     
@@ -58,39 +60,64 @@ const QuoteBox = () => {
 
   const randomQuoteIndex = (quoteIndex) => {
     let index = Math.floor(Math.random() * (quotes.length - 1))
-  if (index >= quoteIndex) {
-    index += 1;
-  }
+    if (index >= quoteIndex) {
+      index += 1;
+    }
     return index;
-}
+  }
 
   useEffect(() => {
-    
     setColorIndex(randomColorIndex())
     document.documentElement.style.setProperty('--color', `${colors[colorIndex]}`)
-
+    
     axios.get(baseURL).then(response => {
         setQuotes(response.data)
         let initIndex = Math.floor(Math.random() * (response.data.length - 1))
-        setRandomQuote(response.data[initIndex])
+        let initQuote = response.data[initIndex]
+        setRandomQuote(initQuote)
+        let tweetLink = document.getElementById("tweet-quote")
+        let tweetText = `"${initQuote.text ? initQuote.text : '...'}" - ${initQuote.author ? initQuote.author : 'Unknown'}`
+        tweetLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
     })
+  }, [setQuotes, setRandomQuote])
 
-  }, [setQuotes, setRandomQuote]);
-    
   function handleNewQuote() {
     setColorIndex(randomColorIndex())
     document.documentElement.style.setProperty('--color', `${colors[colorIndex]}`)
-    setRandomQuote(quotes[randomQuoteIndex()])
+    let newQuote = quotes[randomQuoteIndex()]
+    setRandomQuote(newQuote)
+    let tweetLink = document.getElementById("tweet-quote")
+    let tweetText = `"${newQuote.text ? newQuote.text : '...'}" - ${newQuote.author ? newQuote.author : 'Unknown'}`
+    tweetLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress)
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [])
+
+  function handleKeyPress(event) {
+    if (event.keyCode === 81) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("new-quote")
+      buttonRef.click()
+    } else if (event.keyCode === 84) {
+      event.preventDefault()
+      const buttonRef = document.getElementById("tweet-quote")
+      buttonRef.click()
+    }
   }
   
   return (
     <div id="quote-box">
-      <p id="text">“{randomQuote.text}”</p>
+      <p id="text">“{randomQuote.text?.trim() ? <>{randomQuote.text}</> : <>...</>}”</p>
       <h2 id="author">- {randomQuote.author?.trim() ? <>{randomQuote.author}</> : <>Unknown</>}</h2>
-      <div class="actions">
-      <button id="new-quote" class="button" onClick={handleNewQuote}>New Quote~</button>
-      <button class="button">
-        <a id="tweet-quote" href="https://twitter.com/intent/tweet" >Tweet</a>
+      <div className="actions">
+      <button id="new-quote" className="button" onClick={handleNewQuote}>New Quote~</button>
+      <button className="button">
+        <a id="tweet-quote" href="#" target="_blank">Tweet</a>
       </button>
       </div>
     </div>
@@ -102,4 +129,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("app"))
+createRoot(document.getElementById("root")).render(<App />)

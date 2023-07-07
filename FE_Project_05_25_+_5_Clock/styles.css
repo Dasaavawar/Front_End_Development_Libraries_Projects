@@ -4,42 +4,88 @@
 }
 
 #clock-grid {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(2, 320px);
+    grid-template-columns: repeat(2);
     grid-template-rows: auto 5px;
     gap: 8px;
     align-items: center;
-    background-color: crimson;
-    width: 80vw;
-    height: 80vh;
+    width: 48em;
+    height: 38em;
+    margin-top: 8em;
+    left: 40px;
+    background-color: tomato;
+    border-radius: 16em 16em 24em 24em;
+    box-shadow: inset -2.0em -2.0em brown;
+  }
+  
+  #clock-grid:before {
+    content: '';
+    position: absolute;
+    top: -4.5em;
+    left: 12em;
+    width: 35.85em;
+    height: 22em;
+    border-radius: 24em 24em 0 0;
+    background-color: inherit;
+    box-shadow: -11.85em 0 0 tomato, inset -2.265em 0 brown;
+  }
+  
+  #clock-grid:after {
+  content: '';
+  position: absolute;
+  top: -2em;
+  left: 6em;
+  height: 2.5em;
+  width: 2em;
+  background-color: transparent;
+  border-radius: 50% 50% 0 0;
+  box-shadow: 0.25em 0 0 brown;
+  transform: rotate(-45deg);
 }
 
-#time-part {
+#time-part, #status-part {
+    z-index: 1;
     grid-column-end: span 2;
     grid-row-end: span 1;
     background-color: red;
 }
 
 #status-part {
-    grid-column-end: span 2;
-    grid-row-end: span 1;
-    background-color: red;
+    width: 550px;
 }
 
-#break-part {
+#time-part {
+    width: 600px;
+}
+
+#break-part, #session-part {
+    z-index: 1;
     grid-column-end: span 1;
     grid-row-end: span 1;
     background-color: red;
+    width: 230px;
+    font-size: 14px;
+    color: #5BC236;
 }
 
-#session-part {
-    grid-column-end: span 1;
-    grid-row-end: span 1;
-    background-color: red;
+#start_stop, #reset {
+    width: 105px;
+    height: 25px;
+    background-color: #5BC236;
+    border-radius: 15px;
+}
+
+#break-decrement, #break-increment, #session-decrement, #session-increment {
+    width: 55px;
+    height: 25px;
+    background-color: #5BC236;
+    border-radius: 15px;
 }
 
 #time-left, #timer-label, #break-length, #session-length {
-    color: red;
+    z-index: 1;
+    color: #438F28;
     background-color: black;
     height: 25px;
     align-items: center;
@@ -50,9 +96,11 @@
     font-family: "Gill Sans", sans-serif;
     border: 2px inset darkslateblue;
     margin-bottom: 0.25em;
+    border-radius: 15px;
 }
 
 #main-title, #time-label, #break-label, #session-label {
+    z-index: 1;
     align-items: center;
     text-align: center;
     width: 100%;

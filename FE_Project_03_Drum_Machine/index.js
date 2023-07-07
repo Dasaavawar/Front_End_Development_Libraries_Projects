@@ -1,4 +1,6 @@
-const {useState, useEffect, useRef, createRef} = React;
+const { createRoot } = ReactDOM
+
+const {useState, useEffect, useRef, createRef} = React
 
 const bankOne = [
   {
@@ -55,7 +57,7 @@ const bankOne = [
     id: 'Closed-HH-1',
     url: './sounds/bankOne/Cev_H2.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
   }
-];
+]
 
 const bankTwo = [
   {
@@ -112,7 +114,7 @@ const bankTwo = [
     id: 'Snare',
     url: './sounds/bankTwo/Brk_Snr.mp3' // 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
   }
-];
+]
 
 const Pad = ({note, volumeBar, onDisplayChange, onSequenceChange}) => {
   
@@ -162,7 +164,7 @@ const Pad = ({note, volumeBar, onDisplayChange, onSequenceChange}) => {
 const Drums = (props) => {
 
   const [volume, setVolume] = useState(1)
-  const [speed, setSpeed] = useState(1750)
+  const [speed, setSpeed] = useState(1250)
   const [caseAnimation, setCaseAnimation] = useState(0)
   
   const volumeRef = useRef(volume)
@@ -199,11 +201,9 @@ const Drums = (props) => {
 
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-  let i = 0
+  let i = props.padRefs.current
   const playSequence = async () => {
-    i = props.padRefs.current
     while (props.remixRef.current && i < props.sequence.length) {
-      props.padRefs.current = i
       const keyTrigger = props.sequence[i]
       const note = props.bank.find((note) => note.keyTrigger === keyTrigger)
       if (note) {
@@ -215,6 +215,7 @@ const Drums = (props) => {
         props.handleButtonClick("muted-note")
         setCaseAnimation(caseRef)
       }
+      props.padRefs.current = i;
       caseRef.current = i % 4
       i = (i + 1) % props.sequence.length
       await wait(speedRef.current)
@@ -243,10 +244,10 @@ const Drums = (props) => {
 const App = () => {
 
   const [volumeBar, setVolumeBar] = useState(1)
-  const [remixSpeed, setRemixSpeed] = useState(1750)
+  const [remixSpeed, setRemixSpeed] = useState(1250)
   const [bank, setBank] = useState(false)
   const [powerSwitch, setPowerSwitch] = useState(true)
-  const [displayText, setDisplayText] = useState('Press-a-Key!')
+  const [displayText, setDisplayText] = useState("Press-a-Key!")
   const [sequence, setSequence] = useState(Array(24).fill("M"))
   const [remix, setRemix] = useState(false)
   const [sequencerNote, setSequencerNote] = useState(false)
@@ -255,12 +256,10 @@ const App = () => {
   const drumRef = useRef(null)
   const padRefs = useRef(0)
 
-  console.log('padRefs', padRefs.current)
-
   useEffect(() => {
     if (powerSwitch) {
       setVolumeBar(1)
-      setRemixSpeed(1750)
+      setRemixSpeed(1250)
       setSequencerNote(false)
     } else if (!powerSwitch) {
       setVolumeBar(0)
@@ -271,7 +270,7 @@ const App = () => {
 
   useEffect(() => {
     if (powerSwitch || !powerSwitch) {
-      setDisplayText('Press-a-Key!')
+      setDisplayText("Press-a-Key!")
       setSequence(Array(24).fill("M"))
       setRemix(false)
     }
@@ -335,7 +334,7 @@ const App = () => {
       event.preventDefault()
       const buttonRef = document.getElementById("power")
       buttonRef.click()
-    setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
+      setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
     } else if (event.keyCode === 73) {
       event.preventDefault()
       const buttonRef = document.getElementById("heater-kit-button")
@@ -384,7 +383,7 @@ const App = () => {
         <div id="sequencer-title">NOTES SEQUENCER DISPLAY</div>
         <div id="display">
           {sequence.map((n, i) => (
-            <div id="sequencer-display" key={i} style={i === padRefs.current && sequencerNote ? { color: 'mediumorchid' } : { color: 'forestgreen' }}>{powerSwitch && n}</div>
+            <div id="sequencer-display" key={i} style={i == padRefs.current && sequencerNote ? { color: 'mediumorchid' } : { color: 'forestgreen' }}>{powerSwitch && n}</div>
           ))}
         </div>
       </div>
@@ -467,4 +466,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("app"))
+createRoot(document.getElementById("root")).render(<App />)
