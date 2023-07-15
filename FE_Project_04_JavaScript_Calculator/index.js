@@ -1,13 +1,14 @@
-const {useState, useEffect} = React;
+const { createRoot } = ReactDOM
+const {useState, useEffect} = React
 
 const App = () => {
   const [expression, setExpression] = useState('0')
 
-  const regex = /[+\-*/]{2}$/
-  const max_length = 32
+  const operatorRegex = /[+\-*/]{2}$/
+  const maxLength = 32
 
   const appendNumber = (number) => {
-    if (expression.toString().length >= max_length) {
+    if (expression.toString().length >= maxLength) {
       setExpression((prevText) => prevText)
     } else if (expression == "0") {
       setExpression(number)
@@ -39,7 +40,7 @@ const App = () => {
         setTimeout(() => deleteButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "decimal":
-        if (expression.toString().length >= max_length) {
+        if (expression.toString().length >= maxLength) {
           setExpression((prevText) => prevText)
         } else if (expression.toString().slice(-1) === "." || (expression.toString().split(/[+*\-\/]/).pop().indexOf(".") !== -1)) {
           setExpression((prevText) => prevText)
@@ -64,11 +65,11 @@ const App = () => {
         setTimeout(() => equalsButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "add":
-        if (expression.toString().slice(-1) === "+" || expression.toString().length >= max_length) {
+        if (expression.toString().slice(-1) === "+" || expression.toString().length >= maxLength) {
           setExpression((prevText) => prevText)
         } else if (expression.toString().slice(-2) === "**") {
           setExpression((prevText) => prevText)
-        } else if (regex.test(expression)) {
+        } else if (operatorRegex.test(expression)) {
           setExpression((prevText) => prevText.slice(0, -2) + "+")
         } else if (expression.toString().slice(-1) === "-" || expression.toString().slice(-1) === "/" || expression.toString().slice(-1) === "*") {
           setExpression((prevText) => prevText.slice(0, -1) + "+")
@@ -80,11 +81,11 @@ const App = () => {
         setTimeout(() => addButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "subtract":
-        if (expression.toString().slice(-1) === "-" || expression.toString().length >= max_length) {
+        if (expression.toString().slice(-1) === "-" || expression.toString().length >= maxLength) {
           setExpression((prevText) => prevText)
         } else if (expression.toString().slice(-2) === "**") {
           setExpression((prevText) => prevText + "-")
-        } else if (regex.test(expression)) {
+        } else if (operatorRegex.test(expression)) {
           setExpression((prevText) => prevText.slice(0, -2) + "-")
         } else if (expression.toString().slice(-1) === "+") {
           setExpression((prevText) => prevText.slice(0, -1) + "-")
@@ -96,9 +97,9 @@ const App = () => {
         setTimeout(() => subtractButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "multiply":
-        if (expression.toString().slice(-2) === "**" || expression.toString().length >= max_length) {
+        if (expression.toString().slice(-2) === "**" || expression.toString().length >= maxLength) {
           setExpression((prevText) => prevText)
-        } else if (regex.test(expression)) {
+        } else if (operatorRegex.test(expression)) {
           setExpression((prevText) => prevText.slice(0, -2) + "*")
         } else if (expression.toString().slice(-1) === "*") {
           setExpression((prevText) => prevText + "*")
@@ -112,9 +113,9 @@ const App = () => {
         setTimeout(() => multiplyButtonRef.classList.remove("pressed-button"), 300)
         break;
       case "divide":
-        if (expression.toString().slice(-1) === "/" || expression.toString().length >= max_length) {
+        if (expression.toString().slice(-1) === "/" || expression.toString().length >= maxLength) {
           setExpression((prevText) => prevText)
-        } else if (regex.test(expression)) {
+        } else if (operatorRegex.test(expression)) {
           setExpression((prevText) => prevText.slice(0, -2) + "/")
         } else if (expression.toString().slice(-1) === "-" || expression.toString().slice(-1) === "*" || expression.toString().slice(-1) === "+") {
           setExpression((prevText) => prevText.slice(0, -1) + "/")
@@ -277,7 +278,7 @@ const App = () => {
   return(
     <div className="calculator" id="calculator">
       <div className="grid">
-      <div className="calculator-title">Numpad Calculator</div>
+        <div className="calculator-title">Numpad Calculator</div>
         <div className="screen" id="display">{expression}</div>
         <button className="button" id="clear" onClick={() => handleClick("clear")}>AC</button>
         <button className="button" id="delete" onClick={() => handleClick("delete")}>C</button>
@@ -302,4 +303,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("app"))
+createRoot(document.getElementById("root")).render(<App />)

@@ -1,5 +1,4 @@
 const { createRoot } = ReactDOM
-
 const {useState, useEffect, useRef, createRef} = React
 
 const bankOne = [
@@ -194,9 +193,9 @@ const Drums = (props) => {
     audioTag.volume = volumeRef.current
     audioTag.play()
     props.setDisplayText(note.id)
-    const buttonRef = document.getElementById(note.id)
-    buttonRef.classList.add("played-button")
-    setTimeout(() => buttonRef.classList.remove("played-button"), 200)
+    const noteButtonRef = document.getElementById(note.id)
+    noteButtonRef.classList.add("played-button")
+    setTimeout(() => noteButtonRef.classList.remove("played-button"), 200)
   }
 
   const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -293,13 +292,13 @@ const App = () => {
   
   const handleButtonClick = (id) => {
     if (id == "power") {
-      const buttonRef = document.getElementById(id)
-      buttonRef.classList.add("pressed-power-button")
-      setTimeout(() => buttonRef.classList.remove("pressed-power-button"), 200)
+      const powerButtonRef = document.getElementById(id)
+      powerButtonRef.classList.add("pressed-power-button")
+      setTimeout(() => powerButtonRef.classList.remove("pressed-power-button"), 200)
     } else {
-      const buttonRef = document.getElementById(id)
-      buttonRef.classList.add("pressed-button")
-      setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
+      const otherButtonRef = document.getElementById(id)
+      otherButtonRef.classList.add("pressed-button")
+      setTimeout(() => otherButtonRef.classList.remove("pressed-button"), 200)
     }
   }
 
@@ -332,45 +331,45 @@ const App = () => {
   function handleKeyPress(event) {
      if (event.keyCode === 86) {
       event.preventDefault()
-      const buttonRef = document.getElementById("power")
-      buttonRef.click()
-      setTimeout(() => buttonRef.classList.remove("pressed-button"), 200)
+      const powerButtonRef = document.getElementById("power")
+      powerButtonRef.click()
+      setTimeout(() => powerButtonRef.classList.remove("pressed-button"), 200)
     } else if (event.keyCode === 73) {
       event.preventDefault()
-      const buttonRef = document.getElementById("heater-kit-button")
-      buttonRef.click()
+      const heaterKitButtonRef = document.getElementById("heater-kit-button")
+      heaterKitButtonRef.click()
     } else if (event.keyCode === 79) {
       event.preventDefault()
-      const buttonRef = document.getElementById("smooth-piano-kit-button")
-      buttonRef.click()
+      const pianoKitButtonRef = document.getElementById("smooth-piano-kit-button")
+      pianoKitButtonRef.click()
     } else if (event.keyCode === 71) {
       event.preventDefault()
-      const buttonRef = document.getElementById("dec-volume")
-      buttonRef.click()
+      const decVolumeButtonRef = document.getElementById("dec-volume")
+      decVolumeButtonRef.click()
     } else if (event.keyCode === 72) {
       event.preventDefault()
-      const buttonRef = document.getElementById("inc-volume")
-      buttonRef.click()
+      const incVolumeButtonRef = document.getElementById("inc-volume")
+      incVolumeButtonRef.click()
     } else if (event.keyCode === 74) {
       event.preventDefault()
-      const buttonRef = document.getElementById("dec-remix")
-      buttonRef.click()
+      const decRemixButtonRef = document.getElementById("dec-remix")
+      decRemixButtonRef.click()
     } else if (event.keyCode === 75) {
       event.preventDefault()
-      const buttonRef = document.getElementById("inc-remix")
-      buttonRef.click()
+      const incRemixButtonRef = document.getElementById("inc-remix")
+      incRemixButtonRef.click()
     } else if (event.keyCode === 77) {
       event.preventDefault()
-      const buttonRef = document.getElementById("muted-note")
-      buttonRef.click()
+      const mutedNoteButtonRef = document.getElementById("muted-note")
+      mutedNoteButtonRef.click()
     } else if (event.keyCode === 82) {
       event.preventDefault()
-      const buttonRef = document.getElementById("reset")
-      buttonRef.click()
+      const resetButtonRef = document.getElementById("reset")
+      resetButtonRef.click()
     } else if (event.keyCode === 89) {
       event.preventDefault()
-      const buttonRef = document.getElementById("play-pause")
-      buttonRef.click()
+      const playPauseButtonRef = document.getElementById("play-pause")
+      playPauseButtonRef.click()
     }
   }
 

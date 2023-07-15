@@ -1,37 +1,49 @@
-.pressed-button {
-    color: white;
-    background-color: red;
+
+
+body {  
+  background-color: #b4d9f7;
+  background-repeat: no-repeat;
 }
 
-#clock-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(2);
-    grid-template-rows: auto 5px;
-    gap: 8px;
-    align-items: center;
-    width: 48em;
-    height: 38em;
-    margin-top: 8em;
-    left: 40px;
-    background-color: tomato;
-    border-radius: 16em 16em 24em 24em;
-    box-shadow: inset -2.0em -2.0em brown;
-  }
+#table-container {
+  background-color:  	sienna;
+  position: absolute;
+  width: 100vw;
+  height: 25vh;
+  bottom: 0px;
+  left: 0px;
+  z-index: -1;
+  border-top: 2.5px outset black;
+}
+
+#tomato-container {
+  background-color: tomato;
+  position: absolute;
+  width: 48em;
+  height: 38em;
+  left: 40px;
+  top: 1.5vh;
+  left: 22.5vw;
+  margin-top: 5em;
+  border-radius: 16em 16em 24em 24em;
+  box-shadow: inset -2.0em -2.0em brown;
+  transform: scale(0.80);
+}
+ 
+
+#tomato-container:before {
+  content: '';
+  position: absolute;
+  top: -4.5em;
+  left: 12em;
+  width: 35.85em;
+  height: 22em;
+  border-radius: 24em 24em 0 0;
+  background-color: inherit;
+  box-shadow: -11.85em 0 0 tomato, inset -2.265em 0 brown;
+}
   
-  #clock-grid:before {
-    content: '';
-    position: absolute;
-    top: -4.5em;
-    left: 12em;
-    width: 35.85em;
-    height: 22em;
-    border-radius: 24em 24em 0 0;
-    background-color: inherit;
-    box-shadow: -11.85em 0 0 tomato, inset -2.265em 0 brown;
-  }
-  
-  #clock-grid:after {
+#tomato-container:after {
   content: '';
   position: absolute;
   top: -2em;
@@ -44,68 +56,127 @@
   transform: rotate(-45deg);
 }
 
-#time-part, #status-part {
+
+#clock-grid {
+    display: grid;
+    grid-template-columns: 0fr;
+    grid-template-rows: 0fr;
+    grid-column-gap: 25px;
+    grid-row-gap: 35px;
+    justify-content: center;
+    margin-top: 2.5vh;
+  }
+
+  #main-title {
+    font-size: 36px;
+    margin-bottom: 0px;
+  }
+
+  #time-label, #break-label, #session-label {
+    font-size: 24px;
+  }
+
+  #key-label {
+    font-size: 16px;
+  }
+
+  #main-title, #time-label, #break-label, #session-label, #key-label {
+    color: lawngreen;
+    white-space: nowrap;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 700;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0.25em;
+  }
+
+#time-part, #status-part, #main-title {
     z-index: 1;
     grid-column-end: span 2;
     grid-row-end: span 1;
-    background-color: red;
 }
 
 #status-part {
-    width: 550px;
+    width: 500px;
 }
 
 #time-part {
-    width: 600px;
+    width: 380px;
+    height: 80px;
 }
 
 #break-part, #session-part {
     z-index: 1;
+    grid-row: 4;
     grid-column-end: span 1;
     grid-row-end: span 1;
-    background-color: red;
-    width: 230px;
-    font-size: 14px;
-    color: #5BC236;
+    justify-self: center;
+    align-self: start;
+    width: 200px;
+    height: 40px;
+}
+
+#start_stop, #reset, #break-decrement, #break-increment, #session-decrement, #session-increment {
+    height: 40px;
+    background: linear-gradient(135deg, lawngreen, limegreen);
+    color: forestgreen;
+    border-width: 3.5px;
+    border-color: forestgreen;
+    margin: 2.5px;
+    box-shadow: 3px 3px 3px rgba(165, 42, 42, 0.4);
 }
 
 #start_stop, #reset {
-    width: 105px;
-    height: 25px;
-    background-color: #5BC236;
-    border-radius: 15px;
+  width: 145px;
 }
 
 #break-decrement, #break-increment, #session-decrement, #session-increment {
-    width: 55px;
-    height: 25px;
-    background-color: #5BC236;
-    border-radius: 15px;
+  width: 65px;
 }
+
+.pressed-button {
+  color: darkred;
+  border-color: darkred;
+  background: linear-gradient(135deg, indianred, crimson);
+  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
+  transform: translate(3px, 3px);
+}
+
+#reset, #break-increment, #session-increment {
+    border-radius: 0px 15px 15px 0px;
+    flex-grow: 0;
+}
+
+#start_stop, #break-decrement, #session-decrement {
+    border-radius: 15px 0px 0px 15px;
+    flex-grow: 0;
+}
+
+#time-buttons, #session-buttons, #break-buttons {
+  display: grid;
+  place-items: center;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
 
 #time-left, #timer-label, #break-length, #session-length {
     z-index: 1;
     color: #438F28;
     background-color: black;
-    height: 25px;
+    height: 40px;
     align-items: center;
+    font-family: 'alarm clock', sans-serif;
     text-align: center;
     justify-content: center;
     display: flex;
-    font-size: 20px;
-    font-family: "Gill Sans", sans-serif;
-    border: 2px inset darkslateblue;
+    font-size: 32px;
+    border: 3.5px inset #438F28;
     margin-bottom: 0.25em;
     border-radius: 15px;
-}
-
-#main-title, #time-label, #break-label, #session-label {
-    z-index: 1;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    font-family: "Gill Sans", sans-serif;
-    font-weight: 700;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-    margin-bottom: 0.25em;
 }

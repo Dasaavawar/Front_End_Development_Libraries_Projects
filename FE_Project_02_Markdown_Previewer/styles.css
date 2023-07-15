@@ -1,6 +1,4 @@
   :root {
-    margin: 0px;
-    padding: 0px;
     --background-first-color: white;
     --background-second-color: skyblue;
     --console-first-color: limegreen;
@@ -10,6 +8,8 @@
     --render-second-color: khaki;
     --render-third-color: darkred;
     --scrollbar-first-color: lightgray;
+    margin: 0px;
+    padding: 0px;
   }
 
   *:focus {
@@ -17,17 +17,17 @@
   }
 
   body {
-    font-family: sans-serif;
+    background-color: var(--background-second-color);
     display: flex;
     flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
     width: 100%;
     min-width: 240px;
     height: 100%;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--background-second-color);
-    overflow: hidden;
     margin: 0;
+    overflow: hidden;
   }
   
   #app {
@@ -35,16 +35,16 @@
   }
 
   .app-title {
+    color: var(--background-first-color);
     display: flex;
     flex-shrink: 0;
     position: absolute;
-    left: 50%;
     transform: translateX(-50%);
     justify-content: center;
     align-items: center;
-    color: var(--background-first-color);
     font-family: sans-serif;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    left: 50%;
   }
 
   .app-title h1 {
@@ -54,21 +54,21 @@
   }
 
   .app-title h1::selection {
-    color: var(--background-second-color);
     background-color: var(--background-first-color);
+    color: var(--background-second-color);
   }
 
   .app-container {
+    background-color: var(--console-second-color);
     display: flex;
     flex-shrink: 0;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 90%;
-    background-color: var(--console-second-color);
     justify-content: center;
     align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    bottom: 0;
+    left: 0;
   }
   
   .console-container {
@@ -77,44 +77,44 @@
     flex-direction: column;
     position: absolute;
     height: 100%;
+    width: 50%;
     bottom: 0;
     left: 0;
-    width: 50%;
     overflow: hidden;
   }
 
-  .console-title-bar {
-    height: 20px;
+  .console-title-bar {    
+    color: var(--console-second-color);
+    background-color: var(--console-first-color);
     display: flex;
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
-    background-color: var(--console-first-color);
-    color: var(--console-second-color);
+    height: 20px;
+    font-family: monospace;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 5px;
     border-radius: 5px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    font-family: monospace;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    
   }
   
   .console-content {
+    color: var(--console-first-color);
+    background-color: var(--console-second-color);
+    display: inline-block;
     flex-grow: 1;
+    font-family: monospace;
+    word-wrap: break-word;
     padding: 5px;
     border-radius: 5px;
     border: 1.5px var(--console-first-color) solid;
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    background-color: var(--console-second-color);
-    display: inline-block;
-    color: var(--console-first-color);
     overflow-y: auto;
     overflow-x: auto;
-    word-wrap: break-word;
-    display: inline-block;
-    font-family: monospace;
   }
   
   textarea {
@@ -153,31 +153,35 @@
     flex-shrink: 0;
     flex-direction: column;
     position: absolute;
+    width: 50%;
     height: 100%;
     bottom: 0;
     right: 0;
-    width: 50%;
     overflow: hidden;
   }
   
   .render-title-bar {
-    height: 20px;
+    color: var(--render-second-color);
+    background-color: var(--render-first-color);
     display: flex;
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
-    background-color: var(--render-first-color);
-    color: var(--render-second-color);
+    font-family: cursive;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 5px;
+    height: 20px;
     border-radius: 5px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    font-family: cursive;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   }
   
   .render-content {
+    color: var(--render-first-color);
     flex-grow: 1;
+    display: inline-block;
+    word-wrap: break-word;
+    font-family: cursive;
     padding: 10px;
     border-radius: 5px;
     border: 1.5px var(--render-first-color) solid;
@@ -185,12 +189,8 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     background-color: var(--render-second-color);
-    color: var(--render-first-color);
     overflow-y: auto;
     overflow-x: auto;
-    word-wrap: break-word;
-    display: inline-block;
-    font-family: cursive;
   }
 
   .render-title-bar h2::selection {
@@ -200,8 +200,8 @@
   
   .render-content ::selection,
   #preview ::selection {
-    background-color: var(--render-first-color);
     color: var(--render-second-color);
+    background-color: var(--render-first-color);
   }
 
   #preview::-webkit-scrollbar {
@@ -227,15 +227,15 @@
   }
 
   #preview a {
+    color: var(--render-third-color);
     font-weight: bold;
-    color: var(--render-third-color)
   }
 
   #preview code {
-    background-color: var(--console-second-color);
     color: var(--console-first-color);
-    border-radius: 2.5px;
+    background-color: var(--console-second-color);    
     display: block !important;
+    border-radius: 2.5px;
   }
 
   @media screen and (max-width: 450px) {
@@ -245,16 +245,16 @@
     }
 
     .app-container {
+      background-color: var(--console-second-color);
       display: flex;
       flex-shrink: 0;
+      justify-content: center;
+      align-items: center;
       position: absolute;
       top: 10%;
       left: 0;
       width: 100%;
       height: 90%;
-      background-color: var(--console-second-color);
-      justify-content: center;
-      align-items: center;
     }
 
     .console-container {

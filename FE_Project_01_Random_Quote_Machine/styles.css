@@ -1,29 +1,29 @@
-:root {
+  :root {
+    --color: initial;
     margin: 0px;
     padding: 0px;
-    --color: initial;
   }
   
   body {
-    font-family: sans-serif;
+    background-color: var(--color);
     display: flex;
-    width: 100vw;
-    height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: var(--color);
+    font-family: sans-serif;
+    width: 100vw;
+    height: 100vh;    
   }
   
   h2 {
+    color: var(--color);
     font-size: 20px;
     margin: 15px 0;
-    color: var(--color);
   }
   
   p {
+    color: var(--color);
     margin: 0;
     font-size: 20px;
-    color: var(--color);
   }
   
   #app {
@@ -32,29 +32,29 @@
   }
   
   #quote-box {
+    display: inline-blick;
+    background-color: white;
     width: 60vw;
     padding: 15px;
-    border-radius: 10px;
-    background-color: white;
-    border-color: var(--color);
-    display: inline-blick;
-    border: 2px rgba(0, 0, 0, .6) solid;
+    border-radius: 10px;    
+    box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.3);
   }
   
   .actions {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
   
   .button {
+    display: inline-blick;
+    color: white;
+    background-color: var(--color);
+    border-color: var(--color);
     margin-left: 15px;
     padding: 7px 10px;
     text-decoration: none;
-    background-color: var(--color);
-    border-color: var(--color);
-    display: inline-blick;
+    border-width: 2.5px;
     border-radius: 5px;
-    color: white;
   }
   
   a {

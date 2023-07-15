@@ -1,5 +1,4 @@
 const { createRoot } = ReactDOM
-
 const {useState, useEffect} = React
 
 const QuoteBox = () => {
@@ -117,7 +116,7 @@ const QuoteBox = () => {
       <div className="actions">
       <button id="new-quote" className="button" onClick={handleNewQuote}>New Quote~</button>
       <button className="button">
-        <a id="tweet-quote" href="#" target="_blank">Tweet</a>
+        <a id="tweet-quote" href="#" target="_blank">Tweet Quote~</a>
       </button>
       </div>
     </div>

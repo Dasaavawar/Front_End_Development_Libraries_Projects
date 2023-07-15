@@ -1,10 +1,11 @@
-const {useState, useEffect, useRef} = React;
+const { createRoot } = ReactDOM
+const {useState, useEffect, useRef} = React
 
 const App = () => {
   const [sessionTime, setSessionTime] = useState(25*60)
   const [sessionLength, setSessionLength] = useState(25)
   const [breakLength, setBreakLength] = useState(5)
-  const [sessionWord, setSessionWord] = useState('ready')
+  const [sessionWord, setSessionWord] = useState('READY')
   const [timer, setTimer] = useState(false)
   
   const sessionTimeRef = useRef(sessionTime)
@@ -74,7 +75,7 @@ const App = () => {
       } else if (i === 0) {
         if (focusRef.current == true) {
           focusRef.current = false
-          setSessionWord('new session')
+          setSessionWord('NEW SESSION')
           const newSessionTime = (sessionRef.current*60)
           i = newSessionTime
           setSessionTime(newSessionTime)
@@ -83,7 +84,7 @@ const App = () => {
           playSound()
         } else if (focusRef.current == false) {
           focusRef.current = true
-          setSessionWord('break')
+          setSessionWord('BREAK')
           const newBreakTime = (breakRef.current*60)
           i = newBreakTime
           setSessionTime(newBreakTime)
@@ -94,7 +95,7 @@ const App = () => {
         playTimer()
       } else {
         clearInterval(timerInterval)
-        setSessionWord('ready')
+        setSessionWord('READY')
       }
     }, 1000)  
   }
@@ -128,7 +129,7 @@ const App = () => {
     setBreakLength(5)
     setSessionLength(25)
     setTimer(false)
-    setSessionWord('ready')
+    setSessionWord('READY')
     stopSound()
   }
 
@@ -136,10 +137,10 @@ const App = () => {
     setTimer(!timer)
     if (timer) {
       setTimer(false)
-      setSessionWord('ready')
+      setSessionWord('READY')
     } else {
       setTimer(true)
-      setSessionWord('focus')
+      setSessionWord('FOCUS')
       stopSound()
     }
   }
@@ -196,38 +197,63 @@ const App = () => {
   }
 
   return(
-    <div>        
-        <audio id="beep" ref={audioRef} src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"/>
-
-        <div id='apple'></div>
+    <div>
+      <div id="tomato-container">
+        <audio id="beep" ref={audioRef} src="./sounds/BeepSound.wav" /* src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav" */ />
 
         <div id="clock-grid">
-        <div id="main-title">Pomodoro Clock</div>
-
-          <div id="time-part">
-            <div id="time-label">Session Time</div>
-            <div id="time-left">{clockForm(sessionTime)}</div>
-            Start/Stop <button id="start_stop" onClick={handleStartStop}>W</button><button id="reset" onClick={() => resetTimer()}>R</button> Reset
-          </div>
+          <div id="main-title">POMODORO CLOCK</div>
           
           <div id="status-part">
-            <div id="timer-label">Status: {sessionWord}</div>
+            <div id="timer-label">STATUS: {sessionWord}</div>
+          </div>
+
+          <div id="time-part">
+            <div id="time-label">SESSION TIME</div>
+            <div id="time-left">{clockForm(sessionTime)}</div>
+            <div id="time-buttons">
+              <div id="key-label">W</div>
+              <button id="start_stop" onClick={handleStartStop}><i class="fas fa-play"></i><i class="fas fa-pause"></i></button>
+              <button id="reset" onClick={() => resetTimer()}><i class="fas fa-undo"></i></button>
+              <div id="key-label">R</div>
+            </div>
           </div>
 
           <div id="break-part">
-            <div id="break-label">Break Lenght</div>
+            <div id="break-label">BREAK LENGTH</div>
             <div id="break-length">{breakLength}</div>
-            Decrease <button id="break-decrement" onClick={() => breakDecrease()}>Y</button><button id="break-increment" onClick={() => breakIncrease()}>U</button> Increase
+            <div id="break-buttons">
+              <div id="key-label">Y</div>
+              <button id="break-decrement" onClick={() => breakDecrease()}><i class="fas fa-minus"></i></button>
+              <button id="break-increment" onClick={() => breakIncrease()}><i class="fas fa-plus"></i></button>
+              <div id="key-label">U</div>
+            </div>
           </div>
 
           <div id="session-part">
-            <div id="session-label">Session Length</div>
+            <div id="session-label">SESSION LENGTH</div>
             <div id="session-length">{sessionLength}</div>
-            Decrease <button id="session-decrement" onClick={() => sessionDecrease()}>J</button><button id="session-increment" onClick={() => sessionIncrease()}>K</button> Increase
+            <div id="session-buttons">
+              <div id="key-label">J</div>
+              <button id="session-decrement" onClick={() => sessionDecrease()}><i class="fas fa-minus"></i></button>
+              <button id="session-increment" onClick={() => sessionIncrease()}><i class="fas fa-plus"></i></button>
+              <div id="key-label">K</div>
+            </div>
           </div>
+
         </div>
+      </div>
+      <div id="table-container"></div>
     </div>
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("app"))
+/*
+<div id="power-part">
+  <div id="power-label">POWER BUTTON</div>
+  <button id="power"><i class="fas fa-power-off"></i></button>
+  <div id="key-label">V</div>
+</div>
+*/
+
+createRoot(document.getElementById("root")).render(<App />)

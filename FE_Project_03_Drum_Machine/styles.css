@@ -11,10 +11,10 @@
     justify-content: center;
     align-items: flex-start;
     position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 5px;
-    right: 5px;
+    top: 1vh;
+    bottom: 1vh;
+    left: 0.5vw;
+    right: 0.5vw;
   }
 
   #drum-part {
@@ -261,10 +261,6 @@
     #drum-machine {
       transform: scale(0.85);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
 
@@ -272,10 +268,6 @@
     #drum-machine {
       transform: scale(0.75);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
 
@@ -283,10 +275,6 @@
     #drum-machine {
       transform: scale(0.65);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
 
@@ -294,10 +282,6 @@
     #drum-machine {
       transform: scale(0.55);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
 
@@ -305,10 +289,6 @@
     #drum-machine {
       transform: scale(0.45);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
 
@@ -316,10 +296,6 @@
     #drum-machine {
       transform: scale(0.35);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
 
@@ -327,10 +303,6 @@
     #drum-machine {
       transform: scale(0.30);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
 
@@ -338,9 +310,5 @@
     #drum-machine {
       transform: scale(0.25);
       transform-origin: top left;
-      top: 0px;
-      bottom: 0px;
-      left: 0px;
-      right: 0px;
     }
   }
