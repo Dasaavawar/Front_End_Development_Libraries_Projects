@@ -285,7 +285,7 @@ const App = () => {
   const handleRemix = () => {
     if (remix) {
       setRemix(false)
-    } else {
+    } else if (powerSwitch) {
       setRemix(true)
     }
   }
@@ -441,8 +441,8 @@ const App = () => {
         <div id="set-volume-title">SET VOLUME</div>
         <div id="set-volume-display">{powerSwitch && <>Machines Volume: {Math.round(volumeBar * 100)} %</>}</div>
         <div id="set-volume-buttons">
-          <button id="dec-volume" onClick={() => {setVolumeBar(prevVolume => Math.max(0, prevVolume - 0.05)); handleButtonClick("dec-volume")}} disabled={!powerSwitch}>G</button>
-          <button id="inc-volume" onClick={() => {setVolumeBar(prevVolume => Math.min(1, prevVolume + 0.05)); handleButtonClick("inc-volume")}} disabled={!powerSwitch}>H</button>
+          <button id="dec-volume" onClick={() => {setVolumeBar(prevVolume => Math.max(0, prevVolume - 0.05)); handleButtonClick("dec-volume")}}>G</button>
+          <button id="inc-volume" onClick={() => {setVolumeBar(prevVolume => Math.min(1, prevVolume + 0.05)); handleButtonClick("inc-volume")}}>H</button>
         </div>
       </div>
 
@@ -450,8 +450,8 @@ const App = () => {
         <div id="set-speed-title">SET SPEED</div>
         <div id="set-speed-display">{powerSwitch && <>Remix Speed: {remixSpeed} ms</>}</div>
         <div id="set-speed-buttons">
-          <button id="dec-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.min(3000, prevSpeed + 50)); handleButtonClick("dec-remix")}} disabled={!powerSwitch}>J</button>
-          <button id="inc-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.max(50, prevSpeed - 50)); handleButtonClick("inc-remix")}} disabled={!powerSwitch}>K</button>        
+          <button id="dec-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.min(3000, prevSpeed + 50)); handleButtonClick("dec-remix")}}>J</button>
+          <button id="inc-remix" onClick={() => {setRemixSpeed(prevSpeed => Math.max(50, prevSpeed - 50)); handleButtonClick("inc-remix")}}>K</button>        
         </div>
       </div>      
       

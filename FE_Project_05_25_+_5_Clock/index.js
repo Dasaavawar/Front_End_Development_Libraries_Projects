@@ -7,7 +7,9 @@ const App = () => {
   const [breakLength, setBreakLength] = useState(5)
   const [sessionWord, setSessionWord] = useState('READY')
   const [timer, setTimer] = useState(false)
-  
+  const [timerRunning, settimerRunning] = useState(false)
+  const [powerSwitch, setPowerSwitch] = useState(true)
+
   const sessionTimeRef = useRef(sessionTime)
   const sessionRef = useRef(sessionLength)
   const breakRef = useRef(breakLength) 
@@ -67,37 +69,43 @@ const App = () => {
   
   let i = sessionTimeRef.current
   const playTimer = () => {
-    const timerInterval = setInterval(() => {
-      // console.log('i', i)
-      if (timerRef.current && i > 0) {
-        setSessionTime((prevTime) => prevTime - 1)
-        i--
-      } else if (i === 0) {
-        if (focusRef.current == true) {
-          focusRef.current = false
-          setSessionWord('NEW SESSION')
-          const newSessionTime = (sessionRef.current*60)
-          i = newSessionTime
-          setSessionTime(newSessionTime)
-          // console.log('new session', newSessionTime)
+    if (!timerRunning) {
+      settimerRunning(true)
+
+      const timerInterval = setInterval(() => {
+        // console.log('i', i)
+        if (timerRef.current && i > 0) {
+          setSessionTime((prevTime) => prevTime - 1)
+          i--
+        } else if (i === 0) {
+          settimerRunning(false)
+          if (focusRef.current == true) {
+            focusRef.current = false
+            setSessionWord('NEW SESSION')
+            const newSessionTime = (sessionRef.current*60)
+            i = newSessionTime
+            setSessionTime(newSessionTime)
+            // console.log('new session', newSessionTime)
+            clearInterval(timerInterval)
+            playSound()
+          } else if (focusRef.current == false) {
+            focusRef.current = true
+            setSessionWord('BREAK')
+            const newBreakTime = (breakRef.current*60)
+            i = newBreakTime
+            setSessionTime(newBreakTime)
+            // console.log('break', newBreakTime)
+            clearInterval(timerInterval)
+            playSound()
+          }
+          playTimer()
+        } else {
+          settimerRunning(false)
           clearInterval(timerInterval)
-          playSound()
-        } else if (focusRef.current == false) {
-          focusRef.current = true
-          setSessionWord('BREAK')
-          const newBreakTime = (breakRef.current*60)
-          i = newBreakTime
-          setSessionTime(newBreakTime)
-          // console.log('break', newBreakTime)
-          clearInterval(timerInterval)
-          playSound()
+          setSessionWord('READY')
         }
-        playTimer()
-      } else {
-        clearInterval(timerInterval)
-        setSessionWord('READY')
-      }
-    }, 1000)  
+      }, 1000)
+    }
   }
 
   const breakDecrease = () => {
@@ -143,6 +151,11 @@ const App = () => {
       setSessionWord('FOCUS')
       stopSound()
     }
+  }
+
+  const handlePower = () => {
+    setPowerSwitch(!powerSwitch)
+    resetTimer()
   }
 
   useEffect(() => {
@@ -193,6 +206,13 @@ const App = () => {
       sessionIncButtonRef.click()
       sessionIncButtonRef.classList.add("pressed-button")
       setTimeout(() => sessionIncButtonRef.classList.remove("pressed-button"), 300)
+    } else if (event.keyCode === 86) {
+      event.preventDefault()
+      const powerButtonRef = document.getElementById("power-switch")
+      setTimer(false)
+      powerButtonRef.click()
+      powerButtonRef.classList.add("pressed-button")
+      setTimeout(() => powerButtonRef.classList.remove("pressed-button"), 300)
     }
   }
 
@@ -205,40 +225,46 @@ const App = () => {
           <div id="main-title">POMODORO CLOCK</div>
           
           <div id="status-part">
-            <div id="timer-label">STATUS: {sessionWord}</div>
+            <div id="timer-label">{powerSwitch && (('STATUS: ') + sessionWord)}</div>
           </div>
 
           <div id="time-part">
             <div id="time-label">SESSION TIME</div>
-            <div id="time-left">{clockForm(sessionTime)}</div>
+            <div id="time-left">{powerSwitch && clockForm(sessionTime)}</div>
             <div id="time-buttons">
               <div id="key-label">W</div>
-              <button id="start_stop" onClick={handleStartStop}><i class="fas fa-play"></i><i class="fas fa-pause"></i></button>
-              <button id="reset" onClick={() => resetTimer()}><i class="fas fa-undo"></i></button>
+              <button id="start_stop" onClick={handleStartStop}><i className="fas fa-play"></i><i className="fas fa-pause"></i></button>
+              <button id="reset" onClick={() => resetTimer()}><i className="fas fa-undo"></i></button>
               <div id="key-label">R</div>
             </div>
           </div>
 
           <div id="break-part">
             <div id="break-label">BREAK LENGTH</div>
-            <div id="break-length">{breakLength}</div>
+            <div id="break-length">{powerSwitch && breakLength}</div>
             <div id="break-buttons">
               <div id="key-label">Y</div>
-              <button id="break-decrement" onClick={() => breakDecrease()}><i class="fas fa-minus"></i></button>
-              <button id="break-increment" onClick={() => breakIncrease()}><i class="fas fa-plus"></i></button>
+              <button id="break-decrement" onClick={() => breakDecrease()}><i className="fas fa-minus"></i></button>
+              <button id="break-increment" onClick={() => breakIncrease()}><i className="fas fa-plus"></i></button>
               <div id="key-label">U</div>
             </div>
           </div>
 
           <div id="session-part">
             <div id="session-label">SESSION LENGTH</div>
-            <div id="session-length">{sessionLength}</div>
+            <div id="session-length">{powerSwitch && sessionLength}</div>
             <div id="session-buttons">
               <div id="key-label">J</div>
-              <button id="session-decrement" onClick={() => sessionDecrease()}><i class="fas fa-minus"></i></button>
-              <button id="session-increment" onClick={() => sessionIncrease()}><i class="fas fa-plus"></i></button>
+              <button id="session-decrement" onClick={() => sessionDecrease()}><i className="fas fa-minus"></i></button>
+              <button id="session-increment" onClick={() => sessionIncrease()}><i className="fas fa-plus"></i></button>
               <div id="key-label">K</div>
             </div>
+          </div>
+
+          <div id="power-part">
+            <div id="power-label">POWER BUTTON</div>
+            <button id="power-switch" onClick={handlePower}><i className="fas fa-power-off"></i></button>
+            <div id="key-label">V</div>
           </div>
 
         </div>
@@ -247,13 +273,5 @@ const App = () => {
     </div>
   )
 }
-
-/*
-<div id="power-part">
-  <div id="power-label">POWER BUTTON</div>
-  <button id="power"><i class="fas fa-power-off"></i></button>
-  <div id="key-label">V</div>
-</div>
-*/
 
 createRoot(document.getElementById("root")).render(<App />)
