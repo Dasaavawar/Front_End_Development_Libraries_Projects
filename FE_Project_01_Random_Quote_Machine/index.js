@@ -75,7 +75,8 @@ const QuoteBox = () => {
         let initQuote = response.data[initIndex]
         setRandomQuote(initQuote)
         let tweetLink = document.getElementById("tweet-quote")
-        let tweetText = `"${initQuote.text ? initQuote.text : '...'}" - ${initQuote.author ? initQuote.author : 'Unknown'}`
+        console.log(initQuote.author.replace(/, type\.fit$/, ''))
+        let tweetText = `"${initQuote.text ? initQuote.text : '...'}" - ${initQuote.author ? initQuote.author.replace(/type\.fit$/, '') : 'Unknown'}`
         tweetLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
     })
   }, [setQuotes, setRandomQuote])
@@ -86,7 +87,7 @@ const QuoteBox = () => {
     let newQuote = quotes[randomQuoteIndex()]
     setRandomQuote(newQuote)
     let tweetLink = document.getElementById("tweet-quote")
-    let tweetText = `"${newQuote.text ? newQuote.text : '...'}" - ${newQuote.author ? newQuote.author : 'Unknown'}`
+    let tweetText = `"${newQuote.text ? newQuote.text : '...'}" - ${newQuote.author ? newQuote.author.replace(/, type\.fit$/, '') : 'Unknown'}`
     tweetLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
   }
 
@@ -112,7 +113,7 @@ const QuoteBox = () => {
   return (
     <div id="quote-box">
       <p id="text">“{randomQuote.text?.trim() ? <>{randomQuote.text}</> : <>...</>}”</p>
-      <h2 id="author">- {randomQuote.author?.trim() ? <>{randomQuote.author}</> : <>Unknown</>}</h2>
+      <h2 id="author">- {randomQuote.author?.trim() ? <>{randomQuote.author.replace(/, type\.fit$/, '')}</> : <>Unknown</>}</h2>
       <div className="actions">
       <button id="new-quote" className="button" onClick={handleNewQuote}>New Quote~</button>
       <button className="button">

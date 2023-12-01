@@ -1,314 +1,314 @@
-  body {
-    background: radial-gradient(circle at center, dimgray, gray, darkgray);
-    color: white;
-    position: relative;
-  }
+body {
+  background: radial-gradient(circle at center, dimgray, gray, darkgray);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
 
+#drum-machine {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 25px;
+  position: relative;
+  transform-origin: top;
+}
+
+#drum-part {
+  margin-left: 15px;
+}
+
+#note-part, #status-part, #set-kit-part, #set-remix-part, #set-volume-part, #set-speed-part, #power-part {
+  margin-left: 10px;
+}
+
+#main-title {
+  grid-row: 1;
+  grid-column: 1 / span 3;
+}
+
+#sequencer-part {
+  grid-row: 2;
+  grid-column: 1 / span 3;
+}
+
+#drum-part {
+  grid-row: 3 / span 5;
+  grid-column: 1;
+}
+
+#note-part {
+  grid-row: 3;
+  grid-column: 2;
+}
+
+#status-part {
+  grid-row: 3;
+  grid-column: 3;
+}
+
+#set-kit-part {
+  grid-row: 4;
+  grid-column: 2;
+}
+
+#set-remix-part {
+  grid-row: 4;
+  grid-column: 3;
+}
+
+#set-volume-part {
+  grid-row: 5;
+  grid-column: 2;
+}
+
+#set-speed-part {
+  grid-row: 5;
+  grid-column: 3;
+}
+
+#power-part {
+  grid-row: 6;
+  grid-column: 2 / span 2;
+}
+
+button {
+  color: teal;
+  border-color: teal;
+  background: linear-gradient(135deg, mediumturquoise, darkcyan);
+  border-width: 5px;
+  font-size: 18px;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.pressed-power-button {
+  color: mediumvioletred;
+  border-color: mediumvioletred;
+  background: linear-gradient(135deg, hotpink, deeppink);
+  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
+  transform: translate(3px, 3px);
+}
+
+.pressed-button {
+  color: forestgreen;
+  border-color: forestgreen;
+  background: linear-gradient(135deg, lightgreen, springgreen);
+  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
+  transform: translate(3px, 3px);
+}
+
+.played-button {
+  color: mediumorchid;
+  border-color: mediumorchid;
+  background: linear-gradient(135deg, plum, violet);
+  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
+  transform: translate(3px, 3px);
+}
+
+.Pad {
+  margin: 0px;
+  width: 0px;
+}
+
+.drum-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 135px);
+  grid-gap: 12.5px;
+}
+
+.drum-grid button {
+  font-size: 2rem;
+  height: 137.5px;
+}
+
+#drum-machine {
+  border: 10px ridge darkslateblue;
+  padding: 1em;
+  background: linear-gradient(135deg, mediumslateblue, slateblue);
+  width: 1280px;
+  height: 720px;
+}
+
+#set-remix-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 115px);
+  grid-gap: 7.5px;
+}
+
+#set-remix-buttons button {
+  font-size: 1.5rem;
+  height: 40px;
+}
+
+#set-kit-buttons, #set-volume-buttons, #set-speed-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 175px);
+  grid-gap: 10px;
+}
+
+#set-kit-buttons button, #set-volume-buttons button, #set-speed-buttons button {
+  font-size: 1.5rem;
+  height: 40px;
+}
+
+#power-button {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  grid-gap: 10px;
+}
+
+#power-button button {
+  font-size: 1.5rem;
+  height: 55px;
+}
+
+#set-kit-part, #set-remix-part, #set-volume-part, #set-speed-part {
+  width: 360px;
+}
+
+#power-part {
+  width: 760px;
+}
+
+#main-title, #sequencer-title, #drum-title, #note-title, #status-title, #set-remix-title, #set-kit-title, #set-volume-title, #set-speed-title, #power-title {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  font-family: "Gill Sans", sans-serif;
+  font-weight: 700;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.25em;
+}
+
+#set-remix-display, #set-kit-display, #set-volume-display, #set-speed-display {
+  color: LightSeaGreen;
+}
+
+#status-display, #kit-display, #note-display {
+  color: mediumorchid;
+}
+
+#main-title {
+  color: deeppink;
+}
+
+#drum-title, #sequencer-title, #power-title {
+  color: springgreen;
+}
+
+#status-title, #kit-title, #note-title {
+  color: violet;
+}
+
+#set-remix-title, #set-kit-title, #set-volume-title, #set-speed-title {
+  color: cyan;
+}
+
+#main-title {
+  padding-top: 30px;
+  font-size: 36px;
+} 
+
+#sequencer-title, #drum-title, #note-title, #status-title, #set-remix-title, #set-kit-title, #set-volume-title, #set-speed-title, #power-title {
+  font-size: 24px;
+}
+
+#status-display, #note-display, #set-remix-display, #set-kit-display, #set-volume-display, #set-speed-display {
+  background-color: black;
+  height: 25px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  font-size: 20px;
+  font-family: "Gill Sans", sans-serif;
+  border: 2px inset darkslateblue;
+  margin-bottom: 0.25em;
+}
+
+#status-display, #note-display, #set-kit-display,  #set-remix-display, #set-volume-display, #set-speed-display {
+  width: 360px;
+}
+
+#display {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center
+}
+
+#sequencer-display {
+  background-color: black;
+  width: 25px;
+  height: 25px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  font-size: 20px;
+  font-family: "Gill Sans", sans-serif;
+  border: 2px inset darkslateblue;
+  margin: auto;
+  margin-bottom: 0.25em;
+}
+
+
+@media (max-width: 1280px) {
   #drum-machine {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 25px;
-    justify-content: center;
-    align-items: flex-start;
-    position: absolute;
-    top: 1vh;
-    bottom: 1vh;
-    left: 0.5vw;
-    right: 0.5vw;
+    transform: scale(0.80);
+    margin-bottom: -150px;
   }
+}
 
-  #drum-part {
-    margin-left: 15px;
-  }
 
-  #note-part, #status-part, #set-kit-part, #set-remix-part, #set-volume-part, #set-speed-part, #power-part {
-    margin-left: 10px;
-  }
-
-  #main-title {
-    grid-row: 1;
-    grid-column: 1 / span 3;
-  }
-
-  #sequencer-part {
-    grid-row: 2;
-    grid-column: 1 / span 3;
-  }
-
-  #drum-part {
-    grid-row: 3 / span 5;
-    grid-column: 1;
-  }
-  
-  #note-part {
-    grid-row: 3;
-    grid-column: 2;
-  }
-
-  #status-part {
-    grid-row: 3;
-    grid-column: 3;
-  }
-
-  #set-kit-part {
-    grid-row: 4;
-    grid-column: 2;
-  }
-
-  #set-remix-part {
-    grid-row: 4;
-    grid-column: 3;
-  }
-
-  #set-volume-part {
-    grid-row: 5;
-    grid-column: 2;
-  }
-
-  #set-speed-part {
-    grid-row: 5;
-    grid-column: 3;
-  }
-
-  #power-part {
-    grid-row: 6;
-    grid-column: 2 / span 2;
-  }
-
-  button {
-    color: teal;
-    border-color: teal;
-    background: linear-gradient(135deg, mediumturquoise, darkcyan);
-    border-width: 5px;
-    font-size: 18px;
-    text-transform: uppercase;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
-    position: relative;
-  }
-
-  .pressed-power-button {
-    color: mediumvioletred;
-    border-color: mediumvioletred;
-    background: linear-gradient(135deg, hotpink, deeppink);
-    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
-    transform: translate(3px, 3px);
-  }
-
-  .pressed-button {
-    color: forestgreen;
-    border-color: forestgreen;
-    background: linear-gradient(135deg, lightgreen, springgreen);
-    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
-    transform: translate(3px, 3px);
-  }
-
-  .played-button {
-    color: mediumorchid;
-    border-color: mediumorchid;
-    background: linear-gradient(135deg, plum, violet);
-    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0);
-    transform: translate(3px, 3px);
-  }
-
-  .Pad {
-    margin: 0px;
-    width: 0px;
-  }
-
-  .drum-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 135px);
-    grid-gap: 12.5px;
-  }
-
-  .drum-grid button {
-    font-size: 2rem;
-    height: 137.5px;
-  }
-
+@media (max-width: 1080px) {
   #drum-machine {
-    border: 10px ridge darkslateblue;
-    padding: 1em;
-    background: linear-gradient(135deg, mediumslateblue, slateblue);
-    width: 1280px;
-    height: 720px;
+    transform: scale(0.70);
+    margin-bottom: -230px;
   }
+}
 
-  #set-remix-buttons {
-    display: grid;
-    grid-template-columns: repeat(3, 115px);
-    grid-gap: 7.5px;
+@media (max-width: 960px) {
+  #drum-machine {
+    transform: scale(0.60);
+    margin-bottom: -310px;
   }
+}
 
-  #set-remix-buttons button {
-    font-size: 1.5rem;
-    height: 40px;
+@media (max-width: 820px) {
+  #drum-machine {
+    transform: scale(0.50);
+    margin-bottom: -390px;
   }
+}
 
-  #set-kit-buttons, #set-volume-buttons, #set-speed-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 175px);
-    grid-gap: 10px;
+@media (max-width: 680px) {
+  #drum-machine {
+    transform: scale(0.40);
+    margin-bottom: -470px;
   }
+}
 
-  #set-kit-buttons button, #set-volume-buttons button, #set-speed-buttons button {
-    font-size: 1.5rem;
-    height: 40px;
+@media (max-width: 560px) {
+  #drum-machine {
+    transform: scale(0.30);
+    margin-bottom: -550px;
   }
+}
 
-  #power-button {
-    display: grid;
-    grid-template-columns: repeat(1, auto);
-    grid-gap: 10px;
+@media (max-width: 420px) {
+  #drum-machine {
+    transform: scale(0.25);
+    margin-bottom: -630px;
   }
+}
 
-  #power-button button {
-    font-size: 1.5rem;
-    height: 55px;
+@media (max-width: 360px) {
+  #drum-machine {
+    transform: scale(0.20);
+    margin-bottom: -710px;
   }
-
-  #set-kit-part, #set-remix-part, #set-volume-part, #set-speed-part {
-    width: 360px;
-  }
-
-  #power-part {
-    width: 760px;
-  }
-
-  #main-title, #sequencer-title, #drum-title, #note-title, #status-title, #set-remix-title, #set-kit-title, #set-volume-title, #set-speed-title, #power-title {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    font-family: "Gill Sans", sans-serif;
-    font-weight: 700;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
-    margin-bottom: 0.25em;
-  }
-
-  #set-remix-display, #set-kit-display, #set-volume-display, #set-speed-display {
-    color: LightSeaGreen;
-  }
-
-  #status-display, #kit-display, #note-display {
-    color: mediumorchid;
-  }
-
-  #main-title {
-    color: deeppink;
-  }
-
-  #drum-title, #sequencer-title, #power-title {
-    color: springgreen;
-  }
-
-  #status-title, #kit-title, #note-title {
-    color: violet;
-  }
-
-  #set-remix-title, #set-kit-title, #set-volume-title, #set-speed-title {
-    color: cyan;
-  }
-
-  #main-title {
-    padding-top: 30px;
-    font-size: 36px;
-  } 
-
-  #sequencer-title, #drum-title, #note-title, #status-title, #set-remix-title, #set-kit-title, #set-volume-title, #set-speed-title, #power-title {
-    font-size: 24px;
-  }
-
-  #status-display, #note-display, #set-remix-display, #set-kit-display, #set-volume-display, #set-speed-display {
-    background-color: black;
-    height: 25px;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    font-size: 20px;
-    font-family: "Gill Sans", sans-serif;
-    border: 2px inset darkslateblue;
-    margin-bottom: 0.25em;
-  }
-
-  #status-display, #note-display, #set-kit-display,  #set-remix-display, #set-volume-display, #set-speed-display {
-    width: 360px;
-  }
-
-  #display {
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center
-  }
-
-  #sequencer-display {
-    background-color: black;
-    width: 25px;
-    height: 25px;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    font-size: 20px;
-    font-family: "Gill Sans", sans-serif;
-    border: 2px inset darkslateblue;
-    margin: auto;
-    margin-bottom: 0.25em;
-  }
-
-  @media (max-width: 1280px) {
-    #drum-machine {
-      transform: scale(0.85);
-      transform-origin: top left;
-    }
-  }
-
-  @media (max-width: 1080px) {
-    #drum-machine {
-      transform: scale(0.75);
-      transform-origin: top left;
-    }
-  }
-
-  @media (max-width: 960px) {
-    #drum-machine {
-      transform: scale(0.65);
-      transform-origin: top left;
-    }
-  }
-
-  @media (max-width: 820px) {
-    #drum-machine {
-      transform: scale(0.55);
-      transform-origin: top left;
-    }
-  }
-
-  @media (max-width: 680px) {
-    #drum-machine {
-      transform: scale(0.45);
-      transform-origin: top left;
-    }
-  }
-
-  @media (max-width: 560px) {
-    #drum-machine {
-      transform: scale(0.35);
-      transform-origin: top left;
-    }
-  }
-
-  @media (max-width: 420px) {
-    #drum-machine {
-      transform: scale(0.30);
-      transform-origin: top left;
-    }
-  }
-
-  @media (max-width: 360px) {
-    #drum-machine {
-      transform: scale(0.25);
-      transform-origin: top left;
-    }
-  }
+}

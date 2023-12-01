@@ -1,61 +1,247 @@
-  :root {
-    --background-first-color: white;
-    --background-second-color: skyblue;
-    --console-first-color: limegreen;
-    --console-second-color: black;
-    --console-third-color: darkgreen;
-    --render-first-color: crimson;
-    --render-second-color: khaki;
-    --render-third-color: darkred;
-    --scrollbar-first-color: lightgray;
-    margin: 0px;
-    padding: 0px;
-  }
+:root {
+  --background-first-color: white;
+  --background-second-color: skyblue;
+  --console-first-color: limegreen;
+  --console-second-color: black;
+  --console-third-color: darkgreen;
+  --render-first-color: crimson;
+  --render-second-color: khaki;
+  --render-third-color: darkred;
+  --scrollbar-first-color: lightgray;
+  margin: 0px;
+  padding: 0px;
+}
 
-  *:focus {
-    outline: none;
-  }
+*:focus {
+  outline: none;
+}
 
-  body {
-    background-color: var(--background-second-color);
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    width: 100%;
-    min-width: 240px;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
+body {
+  background-color: var(--background-second-color);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  width: 100%;
+  min-width: 240px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
+}
+
+.app-title {
+  color: var(--background-first-color);
+  display: flex;
+  flex-shrink: 0;
+  position: absolute;
+  transform: translateX(-50%);
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  left: 50%;
+}
+
+.app-title h1 {
+  margin: 5%;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.app-title h1::selection {
+  background-color: var(--background-first-color);
+  color: var(--background-second-color);
+}
+
+.app-container {
+  background-color: var(--console-second-color);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  bottom: 0;
+  left: 0;
+}
+
+.console-container {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.console-title-bar {    
+  color: var(--console-second-color);
+  background-color: var(--console-first-color);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  font-family: monospace;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   
-  #app {
-    height: 100%;
-  }
+}
 
-  .app-title {
-    color: var(--background-first-color);
-    display: flex;
-    flex-shrink: 0;
-    position: absolute;
-    transform: translateX(-50%);
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    left: 50%;
-  }
+.console-content {
+  color: var(--console-first-color);
+  background-color: var(--console-second-color);
+  display: inline-block;
+  flex-grow: 1;
+  font-family: monospace;
+  word-wrap: break-word;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1.5px var(--console-first-color) solid;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  overflow-y: auto;
+  overflow-x: auto;
+}
 
+textarea {
+  resize: none;
+}
+
+.console-title-bar h2::selection {
+  color: var(--console-first-color);
+  background-color: var(--console-second-color);
+}
+
+.console-content::selection {
+  color: var(--console-second-color);
+  background-color: var(--console-first-color);
+}
+
+#editor::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#editor::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-first-color) !important;
+}
+
+#editor::-webkit-scrollbar-thumb {
+  background-color: var(--console-third-color) !important;
+}
+
+#editor::-webkit-scrollbar-corner {
+  background-color: var(--console-first-color) !important;
+}
+
+.render-container {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.render-title-bar {
+  color: var(--render-second-color);
+  background-color: var(--render-first-color);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  font-family: cursive;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.render-content {
+  color: var(--render-first-color);
+  flex-grow: 1;
+  display: inline-block;
+  word-wrap: break-word;
+  font-family: cursive;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1.5px var(--render-first-color) solid;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: var(--render-second-color);
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.render-title-bar h2::selection {
+  color: var(--render-first-color);
+  background-color: var(--render-second-color);
+}
+
+.render-content ::selection,
+#preview ::selection {
+  color: var(--render-second-color);
+  background-color: var(--render-first-color);
+}
+
+#preview::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#preview::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-first-color) !important;
+}
+
+#preview::-webkit-scrollbar-thumb {
+  background-color: var(--render-third-color) !important;
+}
+
+#preview::-webkit-scrollbar-corner {
+  background-color: var(--render-first-color) !important;
+}
+
+#preview pre {
+  background-color: var(--background-first-color);
+  display: block;
+}
+
+#preview a {
+  color: var(--render-third-color);
+  font-weight: bold;
+}
+
+#preview code {
+  color: var(--console-first-color);
+  background-color: var(--console-second-color);    
+  display: block !important;
+  border-radius: 2.5px;
+}
+
+@media screen and (max-width: 450px) {
   .app-title h1 {
-    margin: 5%;
-    font-size: 22px;
-    white-space: nowrap;
-  }
-
-  .app-title h1::selection {
-    background-color: var(--background-first-color);
-    color: var(--background-second-color);
+    margin: 6.5%;
+    font-size: 18px;
   }
 
   .app-container {
@@ -65,226 +251,40 @@
     justify-content: center;
     align-items: center;
     position: absolute;
+    top: 10%;
+    left: 0;
     width: 100%;
     height: 90%;
-    bottom: 0;
-    left: 0;
   }
-  
+
   .console-container {
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
     position: absolute;
-    height: 100%;
-    width: 50%;
-    bottom: 0;
+    height: 50%;
+    top: 0;
     left: 0;
+    width: 100%;
     overflow: hidden;
   }
 
-  .console-title-bar {    
-    color: var(--console-second-color);
-    background-color: var(--console-first-color);
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-    height: 20px;
-    font-family: monospace;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 5px;
-    border-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    
-  }
-  
-  .console-content {
-    color: var(--console-first-color);
-    background-color: var(--console-second-color);
-    display: inline-block;
-    flex-grow: 1;
-    font-family: monospace;
-    word-wrap: break-word;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1.5px var(--console-first-color) solid;
-    border-top: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    overflow-y: auto;
-    overflow-x: auto;
-  }
-  
-  textarea {
-    resize: none;
-  }
-
-  .console-title-bar h2::selection {
-    color: var(--console-first-color);
-    background-color: var(--console-second-color);
-  }
-
-  .console-content::selection {
-    color: var(--console-second-color);
-    background-color: var(--console-first-color);
-  }
-  
-  #editor::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  
-  #editor::-webkit-scrollbar-track {
-    background-color: var(--scrollbar-first-color) !important;
-  }
-  
-  #editor::-webkit-scrollbar-thumb {
-    background-color: var(--console-third-color) !important;
-  }
-
-  #editor::-webkit-scrollbar-corner {
-    background-color: var(--console-first-color) !important;
-  }
-  
   .render-container {
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
     position: absolute;
-    width: 50%;
-    height: 100%;
+    height: 50%;
     bottom: 0;
-    right: 0;
+    left: 0;
+    width: 100%;
     overflow: hidden;
   }
-  
-  .render-title-bar {
-    color: var(--render-second-color);
-    background-color: var(--render-first-color);
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-    font-family: cursive;
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 5px;
-    height: 20px;
-    border-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  
-  .render-content {
-    color: var(--render-first-color);
-    flex-grow: 1;
-    display: inline-block;
-    word-wrap: break-word;
-    font-family: cursive;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1.5px var(--render-first-color) solid;
-    border-top: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    background-color: var(--render-second-color);
-    overflow-y: auto;
-    overflow-x: auto;
-  }
+}
 
-  .render-title-bar h2::selection {
-    color: var(--render-first-color);
-    background-color: var(--render-second-color);
+@media screen and (max-height: 420px) {
+  .app-title h1 {
+    margin: 4.5%;
+    font-size: 18px;
   }
-  
-  .render-content ::selection,
-  #preview ::selection {
-    color: var(--render-second-color);
-    background-color: var(--render-first-color);
-  }
-
-  #preview::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  
-  #preview::-webkit-scrollbar-track {
-    background-color: var(--scrollbar-first-color) !important;
-  }
-  
-  #preview::-webkit-scrollbar-thumb {
-    background-color: var(--render-third-color) !important;
-  }
-
-  #preview::-webkit-scrollbar-corner {
-    background-color: var(--render-first-color) !important;
-  }
-
-  #preview pre {
-    background-color: var(--background-first-color);
-    display: block;
-  }
-
-  #preview a {
-    color: var(--render-third-color);
-    font-weight: bold;
-  }
-
-  #preview code {
-    color: var(--console-first-color);
-    background-color: var(--console-second-color);    
-    display: block !important;
-    border-radius: 2.5px;
-  }
-
-  @media screen and (max-width: 450px) {
-    .app-title h1 {
-      margin: 6.5%;
-      font-size: 18px;
-    }
-
-    .app-container {
-      background-color: var(--console-second-color);
-      display: flex;
-      flex-shrink: 0;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      top: 10%;
-      left: 0;
-      width: 100%;
-      height: 90%;
-    }
-
-    .console-container {
-      display: flex;
-      flex-shrink: 0;
-      flex-direction: column;
-      position: absolute;
-      height: 50%;
-      top: 0;
-      left: 0;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .render-container {
-      display: flex;
-      flex-shrink: 0;
-      flex-direction: column;
-      position: absolute;
-      height: 50%;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      overflow: hidden;
-    }
-  }
-
-  @media screen and (max-height: 420px) {
-    .app-title h1 {
-      margin: 4.5%;
-      font-size: 18px;
-    }
-  }
+}

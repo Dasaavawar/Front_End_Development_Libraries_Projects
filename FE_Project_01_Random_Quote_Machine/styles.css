@@ -1,63 +1,56 @@
-  :root {
-    --color: initial;
-    margin: 0px;
-    padding: 0px;
-  }
-  
-  body {
-    background-color: var(--color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    width: 100vw;
-    height: 100vh;    
-  }
-  
-  h2 {
-    color: var(--color);
-    font-size: 20px;
-    margin: 15px 0;
-  }
-  
-  p {
-    color: var(--color);
-    margin: 0;
-    font-size: 20px;
-  }
-  
-  #app {
-    margin: 5vw;
-    padding: 20px;
-  }
-  
-  #quote-box {
-    display: inline-blick;
-    background-color: white;
-    width: 60vw;
-    padding: 15px;
-    border-radius: 10px;    
-    box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.3);
-  }
-  
-  .actions {
-    display: flex;
-    align-items: center;
-  }
-  
-  .button {
-    display: inline-blick;
-    color: white;
-    background-color: var(--color);
-    border-color: var(--color);
-    margin-left: 15px;
-    padding: 7px 10px;
-    text-decoration: none;
-    border-width: 2.5px;
-    border-radius: 5px;
-  }
-  
-  a {
-    color: white;
-    text-decoration: none;
-  }
+:root {
+  --color: initial;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: var(--color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  width: 98vw;
+  height: 90vh;    
+}
+
+h2 {
+  color: var(--color);
+  font-size: 20px;
+}
+
+p {
+  color: var(--color);
+  font-size: 20px;
+}
+
+#quote-box {
+  display: inline-blick;
+  background-color: white;
+  width: 60vw;
+  padding: 15px;
+  border-radius: 10px;    
+  box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.3);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  display: inline-blick;
+  color: white;
+  background-color: var(--color);
+  border-color: var(--color);
+  margin-left: 15px;
+  padding: 7px 10px;
+  text-decoration: none;
+  border-width: 2.5px;
+  border-radius: 5px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
