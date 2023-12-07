@@ -218,7 +218,9 @@ const App = () => {
 
   return(
     <div>
-      <div id="tomato-container">
+      <div id="tomato">
+        <div id="leaf-up"></div>
+        <div id="leaf-down"></div>
         <audio id="beep" ref={audioRef} src="./sounds/BeepSound.wav" /* src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav" */ />
 
         <div id="clock-grid">
