@@ -115,9 +115,9 @@ const QuoteBox = () => {
       <p id="text">“{randomQuote.text?.trim() ? <>{randomQuote.text}</> : <>...</>}”</p>
       <h2 id="author">- {randomQuote.author?.trim() ? <>{randomQuote.author.replace(/, type\.fit$/, '')}</> : <>Unknown</>}</h2>
       <div className="actions">
-      <button id="new-quote" className="button" onClick={handleNewQuote}>New Quote~</button>
+      <button id="new-quote" className="button" onClick={handleNewQuote}>New Quote ~</button>
       <button className="button">
-        <a id="tweet-quote" href="#" target="_blank">Tweet Quote~</a>
+        <a id="tweet-quote" href="#" target="_blank">Tweet Quote ~</a>
       </button>
       </div>
     </div>
