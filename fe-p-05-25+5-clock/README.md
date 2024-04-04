@@ -1,4 +1,4 @@
-# freeCodeCamp - Front End Development Libraries - Projects - V - Build a JavaScript Calculator - Instructions
+# freeCodeCamp - Front End Development Libraries - Projects - V - Build a 25 + 5 Clock - Instructions
 
 
 # 5. Projects - Build a 25 + 5 Clock

@@ -75,7 +75,7 @@ const QuoteBox = () => {
         let initQuote = response.data[initIndex]
         setRandomQuote(initQuote)
         let tweetLink = document.getElementById("tweet-quote")
-        console.log(initQuote.author.replace(/, type\.fit$/, ''))
+        // console.log(initQuote.author.replace(/, type\.fit$/, ''))
         let tweetText = `"${initQuote.text ? initQuote.text : '...'}" - ${initQuote.author ? initQuote.author.replace(/type\.fit$/, '') : 'Unknown'}`
         tweetLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
     })
